@@ -1,0 +1,29 @@
+/* Import fonts from google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comfortaa:wght@700&family=Gloria+Hallelujah&family=Kolker+Brush&family=Press+Start+2P&display=swap");
+/* 
+Css for all imported fonts
+font-family: 'Architects Daughter', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Kolker Brush', cursive;
+font-family: 'Press Start 2P', cursive;
+ */
+
+html {
+  padding: 0;
+  margin: 0;
+
+  background-color: #262425;
+  color: #fff;
+  font-family: "Comfortaa", cursive;
+}
+
+.main {
+  height: 98vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
