@@ -22,16 +22,12 @@ class Game extends Component {
 
         this.startGame = async () => {
             let gameOver = false
-            let speed = 2500
             while (gameOver === false) {
-                await new Promise((resolve) => setTimeout(resolve, speed));
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
                 let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
                 let lowest = 8
-                if (speed <= 1000) {
-                    speed = speed - 10
-                }
                 while (tempGameTable[lowest][randomNumber2] !== 3) {
                     lowest--;
                     if (lowest === -1) {
