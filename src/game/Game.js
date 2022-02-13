@@ -29,8 +29,8 @@ class Game extends Component {
                 let randomNumber2 = Math.floor(Math.random() * 5);
                 let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
                 let lowest = 8
-                if (speed <= 500) {
-                    speed = speed - 15
+                if (speed <= 1000) {
+                    speed = speed - 10
                 }
                 while (tempGameTable[lowest][randomNumber2] !== 3) {
                     lowest--;
