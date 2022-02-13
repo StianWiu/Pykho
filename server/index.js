@@ -43,7 +43,7 @@ app.post('/', (req, res) => {
   if (!req.body.data[0]) {
     res.send("No data")
   } else {
-    main(toLowercase(req.body.data))
+    main(req.body.data)
   }
   return res.send("Data received");
 });

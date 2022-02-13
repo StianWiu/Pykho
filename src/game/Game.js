@@ -118,7 +118,8 @@ class Game extends Component {
                 if (this.state.words[0].includes(inputString.toLowerCase())) {
                     this.removeLetter(wordArray);
                 } else {
-                    this.state.nonExistent.push(inputString)
+                    this.state.nonExistent.push(inputString.toLowerCase())
+                    console.log(this.state.nonExistent)
                 }
             }
         }
