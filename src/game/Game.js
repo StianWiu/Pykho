@@ -22,8 +22,8 @@ class Game extends Component {
 
         this.startGame = async () => {
             let gameOver = false
-            speed = 2500
-            round = i
+            let speed = 2500
+            let i = 0
             while (gameOver === false) {
                 await new Promise((resolve) => setTimeout(resolve, speed));
                 let tempGameTable = this.state.gameTable;
