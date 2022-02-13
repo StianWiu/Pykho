@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./game.css"
 import "./letters.css"
+require("dotenv").config();
 
 let startGame = false
 const data = require('../words.json');
@@ -24,7 +25,7 @@ class Game extends Component {
         this.sendData = async () => {
             return axios({
                 method: 'post',
-                url: 'http://176.58.108.52:4200/',
+                url: process.env.URL,
                 data: {
                     ["data"]: this.state.nonExistent,
                 }
@@ -36,7 +37,7 @@ class Game extends Component {
         this.startGame = async () => {
             let gameOver = false
             while (gameOver === false) {
-                await new Promise((resolve) => setTimeout(resolve, 150));
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
                 let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
