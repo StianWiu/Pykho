@@ -1,8 +1,11 @@
 import React, { Component } from "react"
 import "./game.css"
 import "./letters.css"
+
 let startGame = false
 const data = require('../words.json');
+const axios = require('axios');
+
 class Game extends Component {
     constructor(props) {
         super(props);
@@ -18,12 +21,22 @@ class Game extends Component {
             points: 0,
         }
 
+        this.sendData = async () => {
+            return axios({
+                method: 'post',
+                url: 'http://176.58.108.52:4200/',
+                data: {
+                    ["data"]: this.state.nonExistent,
+                }
+            }).then((response) => console.log((response.data)))
+        }
+
         console.clear()
 
         this.startGame = async () => {
             let gameOver = false
             while (gameOver === false) {
-                await new Promise((resolve) => setTimeout(resolve, 2000));
+                await new Promise((resolve) => setTimeout(resolve, 150));
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
                 let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
@@ -32,9 +45,11 @@ class Game extends Component {
                     lowest--;
                     if (lowest === -1) {
                         gameOver = true
+                        await this.sendData()
                         window.location.href = "/over?" + this.state.points;
                     }
                 }
+
                 tempGameTable[lowest][randomNumber2] = this.state.letters[randomNumberAlphabet];
 
                 this.setState({
