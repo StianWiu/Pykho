@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import "./game.css"
 import "./letters.css"
-require("dotenv").config();
 
 let startGame = false
 const data = require('../words.json');
@@ -25,7 +24,7 @@ class Game extends Component {
         this.sendData = async () => {
             return axios({
                 method: 'post',
-                url: process.env.URL,
+                url: 'http://176.58.108.52:4200/',
                 data: {
                     ["data"]: this.state.nonExistent,
                 }
