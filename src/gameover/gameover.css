@@ -1,12 +1,12 @@
-.start-title > h1 > span {
+.title > h1 > span {
   margin: 4px;
 }
-.start-title {
+.title {
   font-size: 2.5vh;
 }
 
-.start-title > h1 {
-  margin: 2vh 2vh 4vh 2vh;
+.title > h1 {
+  margin: 4vh 2vh 4vh 2vh;
 
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -17,7 +17,7 @@
   cursor: default;
 }
 
-.start-main {
+.main {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -26,16 +26,15 @@
   align-content: stretch;
 }
 
-.start-middleElement {
+.middleElement {
   background-color: #333132;
   border-radius: 30px;
-  padding: 2vh;
-  height: 24vh;
+  padding: 0 2vh;
 
   text-align: center;
 }
 
-.start-start-button {
+.start-button {
   width: 20vh;
   height: 5vh;
   border-radius: 10px;
@@ -43,14 +42,19 @@
   color: #fff;
   cursor: pointer;
   border: 0;
-  margin-bottom: 3em;
 
   font-size: 1.5vh;
   font-family: "Press Start 2P", cursive;
 }
 
-.start-start-button:hover {
+.start-button:hover {
   animation: changeColor 0.2s ease-in-out 0s forwards;
+}
+
+.middleElement > .title > p {
+  padding-top: 2vh;
+  font-size: 1.5vh;
+  padding-bottom: 1vh;
 }
 
 @keyframes changeColor {

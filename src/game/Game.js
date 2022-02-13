@@ -1,34 +1,52 @@
 import React, { Component } from "react"
 import "./game.css"
-import "../letters.css"
+import "./letters.css"
+let startGame = false
+const data = require('../words.json');
 class Game extends Component {
     constructor(props) {
         super(props);
-        const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+        const alphabet = [
+            "E", "E", "E", "A", "A", "A", "R", "R", "R", "I", "I", "I", "O", "O", "O", "T", "T", "T", "N", "N", "N", "S", "S", "L", "L", "C", "C", "U", "U", "D", "D", "P", "P", "M", "H", "G", "B", "F", "Y", "W", "K", "V", "X", "Z", "J", "Q"
+        ];
+
         this.state = {
-            gameTable: Array.from({ length: 9 }, () => Array.from({ length: 5 }, () => (0))),
-            letters: alpha.map((x) => String.fromCharCode(x)),
+            gameTable: Array.from({ length: 9 }, () => Array.from({ length: 5 }, () => (3))),
+            letters: alphabet,
+            words: data,
+            nonExistent: [],
+            points: 0,
         }
 
         console.clear()
 
-        this.updateArray = async () => {
+        this.startGame = async () => {
             let gameOver = false
+            speed = 2500
+            round = i
             while (gameOver === false) {
-                await new Promise((resolve) => setTimeout(resolve, 10));
+                await new Promise((resolve) => setTimeout(resolve, speed));
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
-                let randomNumber3 = Math.floor(Math.random() * 26);
+                let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
                 let lowest = 8
-
-                while (tempGameTable[lowest][randomNumber2] !== 0) {
+                i++
+                if (i === 10) {
+                    speed = 2000
+                } else if (i === 20) {
+                    speed = 1500
+                }
+                else if (i === 30) {
+                    speed = 1000
+                }
+                while (tempGameTable[lowest][randomNumber2] !== 3) {
                     lowest--;
-                    if (lowest === 0) {
-                        // window.alert("Game Over");
+                    if (lowest === -1) {
                         gameOver = true
+                        window.location.href = "/over?" + this.state.points;
                     }
                 }
-                tempGameTable[lowest][randomNumber2] = this.state.letters[randomNumber3];
+                tempGameTable[lowest][randomNumber2] = this.state.letters[randomNumberAlphabet];
 
                 this.setState({
                     gameTable: tempGameTable
@@ -37,66 +55,102 @@ class Game extends Component {
         }
 
         this.removeLetter = (inputArray) => {
+            // Make a copy of the array to then pass into setState after
             let tempGameTable = this.state.gameTable;
 
+            let points = this.state.points;
+            // Loop through the array and remove the letter from the array
             for (let i = 0; i < tempGameTable.length; i++) {
                 for (let j = 0; j < tempGameTable[i].length; j++) {
-                    for (let s = 0; s < inputArray.length; s++) {
-                        if (tempGameTable[i][j] === inputArray[s]) {
-                            let y = i;
-                            let x = j;
+                    let temp = inputArray.join("");
+                    if (temp.includes(tempGameTable[i][j])) {
+                        inputArray.splice(inputArray.indexOf(tempGameTable[i][j]), 1);
+                        tempGameTable[i][j] = 3;
 
-                            tempGameTable[y][x] = 0;
-                            let y2 = y - 1;
-                            let aboveLetter;
-                            while (tempGameTable[y2][x] !== 0 && y2 >= 0) {
-                                aboveLetter = tempGameTable[y2][x];
-                                tempGameTable[y2][x] = 0;
-                                tempGameTable[y][x] = aboveLetter;
-                                y--;
-                                y2 = y - 1;
-                            }
+                        points++;
+                    }
+                }
+            }
+
+            // Move all letters down, like gravity.
+            for (let s = 0; s < tempGameTable.length; s++) {
+                for (let i = 0; i < tempGameTable.length - 1; i++) {
+                    for (let j = 0; j < tempGameTable[i].length; j++) {
+                        if (tempGameTable[i + 1][j] === 3) {
+                            tempGameTable[i + 1][j] = tempGameTable[i][j];
+                            tempGameTable[i][j] = 3;
                         }
                     }
                 }
             }
 
-
-
             this.setState({
-                gameTable: tempGameTable
+                gameTable: tempGameTable,
+                points: points
             })
         }
-
-        this.test = (e) => {
+        this.inputText = (e) => {
             if (e.key === 'Enter') {
+                let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                 let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
+                e.target.value = "";
                 let wordArray = inputString.split("");
-                this.removeLetter(wordArray);
+                for (let i = 0; i < wordArray.length; i++) {
+                    let exists = false;
+                    for (let j = 0; j < tempGameTable.length; j++) {
+                        for (let k = 0; k < tempGameTable[0].length; k++) {
+                            if (wordArray[i] === tempGameTable[j][k]) {
+                                exists = true;
+                                tempGameTable[j][k] = 4;
+                                j = tempGameTable.length;
+                                k = tempGameTable[0].length;
+                            }
+                        }
+                    }
+                    if (exists === false) {
+                        return;
+                    }
+                }
+                if (this.state.words[0].includes(inputString.toLowerCase())) {
+                    this.removeLetter(wordArray);
+                } else {
+                    this.state.nonExistent.push(inputString)
+                }
             }
+        }
+
+        if (startGame === false) {
+            this.startGame();
+            startGame = true;
         }
 
     }
 
     render() {
+
         return (
             <div className='main'>
                 <div className='game-table'>
                     {this.state.gameTable.map((item, index) => {
                         return (
                             <div className='game-table-line'>
-                                <div className="game-table-item"><span className={`style${item[0]}`}>{item[0]}</span></div>
-                                <div className="game-table-item"><span className={`style${item[1]}`}>{item[1]}</span></div>
-                                <div className="game-table-item"><span className={`style${item[2]}`}>{item[2]}</span></div>
-                                <div className="game-table-item"><span className={`style${item[3]}`}>{item[3]}</span></div>
-                                <div className="game-table-item"><span className={`style${item[4]}`}>{item[4]}</span></div>
+                                <div className="game-table-item"><span className={`letter-${item[0]}`}>{item[0]}</span></div>
+                                <div className="game-table-item"><span className={`letter-${item[1]}`}>{item[1]}</span></div>
+                                <div className="game-table-item"><span className={`letter-${item[2]}`}>{item[2]}</span></div>
+                                <div className="game-table-item"><span className={`letter-${item[3]}`}>{item[3]}</span></div>
+                                <div className="game-table-item"><span className={`letter-${item[4]}`}>{item[4]}</span></div>
                             </div>
                         )
                     })}
-                </div>
-                <div className="test">
-                    <button onClick={this.updateArray}>Start game</button>
-                    <input onKeyPress={this.test} />
+
+                    <input className="input-field" onPaste={(e) => {
+                        e.preventDefault()
+                        return false;
+                    }} onCopy={(e) => {
+                        e.preventDefault()
+                        return false;
+                    }} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
+                    <h1>{this.state.points}</h1>
                 </div>
             </div >
         )
