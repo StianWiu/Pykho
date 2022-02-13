@@ -40,7 +40,11 @@ app.use(express.json())
 
 
 app.post('/', (req, res) => {
-  main(toLowercase(req.body.data))
+  if (!req.body.data[0]) {
+    res.send("No data")
+  } else {
+    main(toLowercase(req.body.data))
+  }
   return res.send("Data received");
 });
 
