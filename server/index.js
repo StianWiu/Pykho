@@ -40,7 +40,7 @@ app.use(express.json())
 
 
 app.post('/', (req, res) => {
-  main(req.body.data)
+  main(req.body.data.toLowercase())
   return res.send("Data received");
 });
 
