@@ -10,7 +10,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         const alphabet = [
-            "E", "E", "E", "A", "A", "A", "R", "R", "R", "I", "I", "I", "O", "O", "O", "T", "T", "T", "N", "N", "N", "S", "S", "L", "L", "C", "C", "U", "U", "D", "D", "P", "P", "M", "H", "G", "B", "F", "Y", "W", "K", "V", "X", "Z", "J", "Q"
+            "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "A", "A", "A", "A", "A", "A", "A", "A", "R", "R", "R", "R", "R", "R", "R", "I", "I", "I", "I", "I", "I", "I", "O", "O", "O", "O", "O", "O", "O", "T", "T", "T", "T", "T", "T", "T", "N", "N", "N", "N", "N", "N", "S", "S", "S", "S", "S", "L", "L", "L", "L", "L", "C", "C", "C", "C", "U", "U", "U", "D", "D", "D", "P", "P", "P", "M", "M", "M", "H", "H", "H", "G", "G", "B", "B", "F", "F", "Y", "W", "K", "V", "X", "Z", "J", "Q"
         ];
 
         this.state = {
@@ -22,13 +22,16 @@ class Game extends Component {
         }
 
         this.sendData = async () => {
-            return axios({
-                method: 'post',
-                url: 'http://176.58.108.52:4200/',
-                data: {
-                    ["data"]: this.state.nonExistent,
-                }
-            }).then((response) => console.log((response.data)))
+            if (this.state.nonExistent[0]) {
+                console.log("sent data")
+                return axios({
+                    method: 'post',
+                    url: 'http://176.58.108.52:4200/',
+                    data: {
+                        ["data"]: this.state.nonExistent,
+                    }
+                }).then((response) => console.log((response.data)))
+            }
         }
 
         console.clear()
