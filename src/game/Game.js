@@ -35,8 +35,13 @@ class Game extends Component {
 
         this.startGame = async () => {
             let gameOver = false
+            let delay = document.location.toString().split("?").slice(1).join("?")
             while (gameOver === false) {
-                await new Promise((resolve) => setTimeout(resolve, 2000));
+                if (delay && isNaN(delay) === false) {
+                    await new Promise((resolve) => setTimeout(resolve, delay));
+                } else {
+                    await new Promise((resolve) => setTimeout(resolve, 2500));
+                }
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
                 let randomNumberAlphabet = Math.floor(Math.random() * this.state.letters.length);
