@@ -26,7 +26,7 @@ class Game extends Component {
                 console.log("sent data")
                 return axios({
                     method: 'post',
-                    url: 'http://176.58.108.52:4200/',
+                    url: 'https://176.58.108.52:4200/',
                     data: {
                         ["data"]: this.state.nonExistent,
                     }
