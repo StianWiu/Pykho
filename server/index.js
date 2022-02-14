@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 4200;
+const fs = require("fs");
+const https = require("https");
 
 const { MongoClient } = require('mongodb')
 const config = require("dotenv").config();
@@ -48,6 +50,13 @@ app.post('/', (req, res) => {
   return res.send("Data received");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert"),
+    },
+    app
+  )
+  .listen(port);
+
