@@ -1,15 +1,10 @@
 const express = require("express");
 const app = express();
 const port = 4200;
-const fs = require("fs");
-const https = require("https");
-
 const { MongoClient } = require('mongodb')
-const config = require("dotenv").config();
-
+require('dotenv').config()
 async function main(data) {
-  const uri = process.env.URI;
-
+  const uri = process.env.uri;
   const client = new MongoClient(uri)
 
   try {
