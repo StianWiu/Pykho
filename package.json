@@ -27,8 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve": "seve -s build -l 6969",
-    "server": "node /server/index.js",
+    "serve": "serve -s build -l 6969",
+    "server": "node ./server/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
