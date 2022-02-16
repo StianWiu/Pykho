@@ -17,7 +17,8 @@ async function main(data) {
     console.log("Connected correctly to server");
     let i = 0;
     await createData(client, {
-      "data": data
+      "data": data,
+      "time": new Date()
     })
   } catch (e) {
     console.error(e);
@@ -32,7 +33,7 @@ async function listDatabases(client) {
 }
 
 async function createData(client, newListing) {
-  const result = await client.db("not_added").collection("not_added").insertOne(newListing);
+  const result = await client.db("Pykho").collection("New words").insertOne(newListing);
   console.log("New data appended with the following ID:" + result.insertedId);
 }
 
@@ -43,20 +44,14 @@ app.use(express.json())
 
 app.post('/', (req, res) => {
   if (!req.body.data[0]) {
-    res.send("No data")
+    return res.send("No data");
   } else {
     main(req.body.data)
+    return res.send("Data received");
   }
-  return res.send("Data received");
 });
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert"),
-    },
-    app
-  )
-  .listen(port);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`)
+})
 
