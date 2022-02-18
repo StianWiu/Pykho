@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 4200;
+const port = 3000;
 const { MongoClient } = require('mongodb')
 require('dotenv').config()
 async function main(data) {
@@ -32,12 +32,14 @@ async function createData(client, newListing) {
   console.log("New data appended with the following ID:" + result.insertedId);
 }
 
-var cors = require('cors')
-app.use(cors())
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+});
+
 app.use(express.json())
 
 
-app.post('/', (req, res) => {
+app.post('/server/', (req, res) => {
   if (!req.body.data[0]) {
     return res.send("No data");
   } else {
