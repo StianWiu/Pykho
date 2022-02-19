@@ -56,5 +56,5 @@ app.post('/server/', function (req, res) {
 // Start server
 
 app.listen(port, function () {
-    console.log(`Server listening on port ${port})`);
+    console.log(`Server listening on port ${port} | ${new Date()}`);
 });
