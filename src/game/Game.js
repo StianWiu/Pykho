@@ -9,7 +9,8 @@ const axios = require('axios');
 
 const getIp = async () => {
     const res = await axios.get('https://geolocation-db.com/json/')
-    return (Object.keys(res.data))
+    const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
+    return (ip)
 }
 class Game extends Component {
     constructor(props) {
