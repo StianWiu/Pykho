@@ -1,4 +1,4 @@
-.letter-p {
+.letter_p {
   border: 1px solid #f04a4a;
   background-color: #f04a4a;
   border-radius: 40px;
@@ -6,14 +6,14 @@
   color: #92fade;
 }
 
-.letter-y {
+.letter_y {
   border: 1px solid #b8ff85;
   background-color: #b8ff85;
   border-radius: 5px;
   padding: 1vh 2vh 1vh 2vh;
   color: #ff8a8a;
 }
-.letter-k {
+.letter_k {
   border: 1px solid #4d4a4b;
   background-color: #4d4a4b;
   border-radius: 5px;
@@ -21,7 +21,7 @@
   color: #b18aff;
 }
 
-.letter-h {
+.letter_h {
   border: 1px solid #5195ed;
   background-color: #5195ed;
   border-radius: 40px;
@@ -29,7 +29,7 @@
   color: #fc7373;
 }
 
-.letter-o {
+.letter_o {
   border: 1px solid #ed5185;
   background-color: #ed5185;
   border-radius: 5px;

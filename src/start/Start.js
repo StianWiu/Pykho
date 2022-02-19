@@ -1,23 +1,23 @@
-import "../letters.css"
-import "./start.css"
+import letters from "../letters.module.css"
+import styles from './start.module.css'
+
+const setDifficulty = (difficulty) => {
+    localStorage.setItem('Difficulty', difficulty);
+    window.location.href = "/game";
+}
 
 export default function Start() {
     return (
-        <div className="start-main">
-            <div className="start-middleElement">
-                <div className="start-title">
+        <div className={styles.main}>
+            <div className={styles.middleElement}>
+                <div className={styles.title}>
                     <h1>
-                        <span className="letter-p">P</span>
-                        <span className="letter-y">Y</span>
-                        <span className="letter-k">K</span>
-                        <span className="letter-h">H</span>
-                        <span className="letter-o">O</span>
+                        <span className={letters.letter_p}>P</span>
+                        <span className={letters.letter_y}>Y</span>
+                        <span className={letters.letter_k}>K</span>
+                        <span className={letters.letter_h}>H</span>
+                        <span className={letters.letter_o}>O</span>
                     </h1>
-                    <div className="start-buttons">
-                        <a href="/game">
-                            <button className="start-start-button">START GAME</button>
-                        </a>
-                    </div>
                     <p>Game developed by Pignuuu</p>
                 </div>
             </div>

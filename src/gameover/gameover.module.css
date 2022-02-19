@@ -1,3 +1,13 @@
+.main {
+  height: 98vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
 .title > h1 > span {
   margin: 4px;
 }
@@ -6,7 +16,7 @@
 }
 
 .title > h1 {
-  margin: 4vh 2vh 4vh 2vh;
+  margin: 2vh 2vh 4vh 2vh;
 
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -17,24 +27,15 @@
   cursor: default;
 }
 
-.main {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
-}
-
 .middleElement {
   background-color: #333132;
   border-radius: 30px;
-  padding: 0 2vh;
+  padding: 2vh;
 
   text-align: center;
 }
 
-.start-button {
+.start_button {
   width: 20vh;
   height: 5vh;
   border-radius: 10px;
@@ -42,19 +43,23 @@
   color: #fff;
   cursor: pointer;
   border: 0;
+  margin-bottom: 3em;
 
   font-size: 1.5vh;
   font-family: "Press Start 2P", cursive;
 }
 
-.start-button:hover {
-  animation: changeColor 0.2s ease-in-out 0s forwards;
+.start_buttons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
 }
 
-.middleElement > .title > p {
-  padding-top: 2vh;
-  font-size: 1.5vh;
-  padding-bottom: 1vh;
+.start_button:hover {
+  animation: changeColor 0.2s ease-in-out 0s forwards;
 }
 
 @keyframes changeColor {

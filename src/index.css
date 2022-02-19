@@ -17,13 +17,3 @@ html {
   color: #fff;
   font-family: "Comfortaa", cursive;
 }
-
-.main {
-  height: 98vh;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
-}

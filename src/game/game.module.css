@@ -1,8 +1,18 @@
+.main {
+  height: 98vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
 * {
   padding: 0;
   margin: 0;
 }
-.game-table {
+.game_table {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +22,7 @@
   font-size: 2vh;
 }
 
-.game-table-line {
+.game_table_line {
   border-top: 3px solid #635e60;
   border-radius: 2px;
   display: flex;
@@ -23,7 +33,7 @@
   height: 100%;
 }
 
-.game-table-item {
+.game_table_item {
   padding: 2.5vh;
   width: 3vh;
   height: 2.5vh;
@@ -32,7 +42,7 @@
   align-items: center;
 }
 
-.input-field {
+.input_field {
   margin-top: 2vh;
   padding: 0.55vh;
   border-radius: 15px;

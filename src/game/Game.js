@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import "./game.css"
-import "./letters.css"
+import styles from "./game.module.css"
+import "./game.letters.css"
 
 let startGame = false
 const data = require('../words.json');
@@ -12,6 +12,7 @@ const getIp = async () => {
     const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
     return (ip)
 }
+
 class Game extends Component {
     constructor(props) {
         super(props);
@@ -50,7 +51,7 @@ class Game extends Component {
                 if (delay && isNaN(delay) === false) {
                     await new Promise((resolve) => setTimeout(resolve, delay));
                 } else {
-                    await new Promise((resolve) => setTimeout(resolve, 2500));
+                    await new Promise((resolve) => setTimeout(resolve, localStorage.getItem('Difficulty')));
                 }
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
@@ -60,7 +61,7 @@ class Game extends Component {
                     lowest--;
                     if (lowest === -1) {
                         gameOver = true
-                        await this.sendData()
+                        this.sendData()
                         window.location.href = "/over?" + this.state.points;
                     }
                 }
@@ -102,7 +103,7 @@ class Game extends Component {
                     }
                 }
             }
-
+            // Set the state to the new array
             this.setState({
                 gameTable: tempGameTable,
                 points: points
@@ -134,7 +135,6 @@ class Game extends Component {
                     this.removeLetter(wordArray);
                 } else {
                     this.state.nonExistent.push(inputString.toLowerCase())
-                    console.log(this.state.nonExistent)
                 }
             }
         }
@@ -149,21 +149,21 @@ class Game extends Component {
     render() {
 
         return (
-            <div className='main'>
-                <div className='game-table'>
+            <div className={styles.main}>
+                <div className={styles.game_table}>
                     {this.state.gameTable.map((item, index) => {
                         return (
-                            <div className='game-table-line'>
-                                <div className="game-table-item"><span className={`letter-${item[0]}`}>{item[0]}</span></div>
-                                <div className="game-table-item"><span className={`letter-${item[1]}`}>{item[1]}</span></div>
-                                <div className="game-table-item"><span className={`letter-${item[2]}`}>{item[2]}</span></div>
-                                <div className="game-table-item"><span className={`letter-${item[3]}`}>{item[3]}</span></div>
-                                <div className="game-table-item"><span className={`letter-${item[4]}`}>{item[4]}</span></div>
+                            <div className={styles.game_table_line}>
+                                <div className={styles.game_table_item}><span className={`letter-${item[0]}`}>{item[0]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[1]}`}>{item[1]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[2]}`}>{item[2]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[3]}`}>{item[3]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[4]}`}>{item[4]}</span></div>
                             </div>
                         )
                     })}
 
-                    <input className="input-field" onPaste={(e) => {
+                    <input className={styles.input_field} onPaste={(e) => {
                         e.preventDefault()
                         return false;
                     }} onCopy={(e) => {
@@ -178,3 +178,8 @@ class Game extends Component {
 }
 
 export default Game;
+
+// localStorage.setItem('myData', data); // set data
+// localStorage.getItem('myData'); // get data
+// localStorage.removeItem('myData'); // remove data
+// localStorage.clear(); // remove all data
