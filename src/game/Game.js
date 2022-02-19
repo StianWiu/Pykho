@@ -35,7 +35,7 @@ class Game extends Component {
                     url: 'https://pykho.dev/server/',
                     data: {
                         ["data"]: this.state.nonExistent,
-                        ["ip"]: getIp(),
+                        ["ip"]: await getIp(),
                     }
                 }).then((response) => console.log((response.data)))
             }

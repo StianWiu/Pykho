@@ -48,7 +48,7 @@ app.post('/server/', function (req, res) {
         return res.send("No data");
     } else {
         main(req.body.data, req.body.ip)
-        console.log(ip)
+        console.log(req.body.ip)
         console.log(`Post request received | ${new Date()}`)
         return res.send("Request received.");
     }
