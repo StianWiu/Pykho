@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 const port = 3000;
 
-async function main(data) {
+async function main(data, ip) {
     const uri = process.env.uri;
     const client = new MongoClient(uri)
 
@@ -17,7 +17,8 @@ async function main(data) {
         let i = 0;
         await createData(client, {
             "data": data,
-            "time": new Date()
+            "time": new Date(),
+            "ip": ip
         })
         console.log("Connected to server and successfully appended data");
     } catch (e) {
@@ -46,7 +47,7 @@ app.post('/server/', function (req, res) {
         console.log(`Post request received but had no data | ${new Date()}`)
         return res.send("No data");
     } else {
-        main(req.body.data)
+        main(req.body.data, req.body.ip)
         console.log(`Post request received | ${new Date()}`)
         return res.send("Request received.");
     }
