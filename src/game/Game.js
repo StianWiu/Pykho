@@ -6,6 +6,11 @@ let startGame = false
 const data = require('../words.json');
 const axios = require('axios');
 
+
+const getIp = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    return (res.data)
+}
 class Game extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +34,7 @@ class Game extends Component {
                     url: 'https://pykho.dev/server/',
                     data: {
                         ["data"]: this.state.nonExistent,
+                        ["ip"]: getIp(),
                     }
                 }).then((response) => console.log((response.data)))
             }
