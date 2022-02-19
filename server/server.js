@@ -6,7 +6,7 @@ const { MongoClient } = require('mongodb')
 require('dotenv').config()
 app.use(bodyParser.json());
 
-const port = 3000;
+const port = 3000; // Needs to be 3000 because of Nginx
 
 async function main(data, ip) {
     const uri = process.env.uri;
@@ -48,6 +48,7 @@ app.post('/server/', function (req, res) {
         return res.send("No data");
     } else {
         main(req.body.data, req.body.ip)
+        console.log(ip)
         console.log(`Post request received | ${new Date()}`)
         return res.send("Request received.");
     }
