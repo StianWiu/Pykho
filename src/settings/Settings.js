@@ -35,6 +35,17 @@ class Start extends Component {
                 difficulty: value
             })
         }
+        this.setTwitchUsername = (e) => {
+            sessionStorage.setItem("twitchUsername", e.target.value);
+        }
+
+        this.checkTwitchUsername = () => {
+            if (sessionStorage.getItem("twitchUsername") === null) {
+                return "";
+            } else {
+                return sessionStorage.getItem("twitchUsername");
+            }
+        }
 
     }
     render() {
@@ -48,8 +59,11 @@ class Start extends Component {
                     <span className="letter-o"><span className={styles.letter}>O</span></span>
                 </div>
                 <div className={setting.difficulty}>
-                    <input min={0.1} type={"number"} defaultValue={this.state.difficulty} onInput={(e) => this.changeDifficulty(e)} className={setting.input}></input>
+                    <input min={0.1} type={"number"} defaultValue={this.state.difficulty} onInput={(e) => this.changeDifficulty(e)} className={setting.num_input}></input>
                     <h3>Delay</h3>
+                </div>
+                <div className={setting.difficulty}>
+                    <input defaultValue={this.checkTwitchUsername()} placeholder={"Twitch Chat"} onInput={(e) => this.setTwitchUsername(e)} className={setting.text_input}></input>
                 </div>
                 <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
             </div >

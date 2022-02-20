@@ -5,7 +5,10 @@ import "../letters.css"
 let startGame = false
 const data = require('../words.json');
 const axios = require('axios');
-
+let twitch = false;
+if (sessionStorage.twitchUsername) {
+    twitch = true
+}
 
 const getIp = async () => {
     if (sessionStorage.getItem('ip') === null) {
@@ -62,6 +65,46 @@ class Game extends Component {
             let gameOver = false
             let delay = localStorage.getItem('difficulty')
             while (gameOver === false) {
+                if (twitch === true) {
+                    axios({
+                        method: 'post',
+                        url: 'https://pykho.dev/api/twitch',
+                        data: {
+                            ["username"]: sessionStorage.twitchUsername,
+                        }
+                    }).then(async (response) => {
+                        let e = "";
+                        await new Promise(r => setTimeout(r, 2000));
+                        for (let i = 0; i < response.data.length; i++) {
+                            e = response.data[i]
+                            let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
+                            let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
+                            e.target.value = "";
+                            let wordArray = inputString.split("");
+                            for (let i = 0; i < wordArray.length; i++) {
+                                let exists = false;
+                                for (let j = 0; j < tempGameTable.length; j++) {
+                                    for (let k = 0; k < tempGameTable[0].length; k++) {
+                                        if (wordArray[i] === tempGameTable[j][k]) {
+                                            exists = true;
+                                            tempGameTable[j][k] = 4;
+                                            j = tempGameTable.length;
+                                            k = tempGameTable[0].length;
+                                        }
+                                    }
+                                }
+                                if (exists === false) {
+                                    return;
+                                }
+                            }
+                            if (this.state.words[0].includes(inputString.toLowerCase())) {
+                                this.removeLetter(wordArray);
+                            } else {
+                                this.state.nonExistent.push(inputString.toLowerCase())
+                            }
+                        }
+                    })
+                }
                 if (!delay) {
                     await new Promise((resolve) => setTimeout(resolve, 1500));
                 } else {

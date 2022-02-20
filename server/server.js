@@ -88,5 +88,6 @@ const recordChat = async (channel) => {
         messages.push(chatter.message)
     })
     await new Promise(resolve => setTimeout(resolve, 5000))
+    Bot.close()
     return messages
 }
