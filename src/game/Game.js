@@ -187,7 +187,10 @@ class Game extends Component {
                                 inputString = e.toUpperCase();;
                             }
                             e = "";
-                            let wordArray = inputString.split("");
+                            let wordArray
+                            if (!wordArray === undefined) {
+                                wordArray = inputString.split("");
+                            }
                             for (let i = 0; i < wordArray.length; i++) {
                                 let exists = false;
                                 for (let j = 0; j < tempGameTable.length; j++) {
