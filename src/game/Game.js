@@ -166,7 +166,6 @@ class Game extends Component {
         }
 
         this.twitchChat = async () => {
-            await new Promise((resolve) => setTimeout(resolve, 6000));
             while (twitch === true) {
                 await axios({
                     method: 'post',
@@ -179,7 +178,7 @@ class Game extends Component {
                     if (response.data.length > 0) {
                         for (let s = 0; s <= response.data.length; s++) {
                             await new Promise((resolve) => setTimeout(resolve, 2000));
-                            let e = response.data[s];
+                            let e = response.data[s].toString();
                             console.log(e)
                             let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                             let inputString = e.toUpperCase();;
