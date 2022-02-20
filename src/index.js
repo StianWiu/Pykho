@@ -1,15 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.css"
-import App from './App';
 import Game from './game/Game';
-import Gameover from './gameover/Gameover';
+import Start from './start/Start';
+import Settings from './settings/Settings';
+import Error from './Error';
 
-if (document.location.toString().indexOf('/game') > -1) {
+if (!navigator.cookieEnabled) {
+    ReactDOM.render(<Error reason="cookies" />, document.getElementById('root'));
+}
+
+if (!localStorage.getItem('difficulty')) {
+    localStorage.setItem('difficulty', 1500);
+}
+if (!localStorage.getItem('highscore')) {
+    localStorage.setItem('highscore', 0);
+}
+
+if (!sessionStorage.getItem('screen')) {
+    sessionStorage.setItem('screen', "start");
+}
+if (window.innerWidth <= 300) {
+    window.alert("Your device screen is very small. You may experience issues playing this game.");
+}
+
+if (sessionStorage.getItem('screen') === "start") {
+    ReactDOM.render(<Start />, document.getElementById('root'));
+} else if (sessionStorage.getItem('screen') === "game") {
     ReactDOM.render(<Game />, document.getElementById('root'));
-} else if (document.location.toString().indexOf('/over') > -1) {
-    ReactDOM.render(<Gameover />, document.getElementById('root'));
-
-} else {
-    ReactDOM.render(<App />, document.getElementById('root'));
+} else if (sessionStorage.getItem('screen') === "settings") {
+    ReactDOM.render(<Settings />, document.getElementById('root'));
 }

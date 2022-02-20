@@ -1,0 +1,33 @@
+.difficulty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35vh;
+  margin-bottom: 2vh;
+}
+
+.difficulty > h3 {
+  margin-right: 35%;
+  color: #589bff;
+}
+
+.input {
+  text-align: center;
+  width: 6vh;
+  height: 4vh;
+  border-radius: 20px;
+  border: 10px solid #589bff;
+  background: #262425;
+  color: #589bff;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  font-size: 2.5vh;
+
+  padding: 10px 0 10px 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

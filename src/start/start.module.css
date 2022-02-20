@@ -1,22 +1,11 @@
 .main {
   height: 98vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   align-content: stretch;
-}
-
-.title > h1 > span {
-  margin: 4px;
-}
-.title {
-  font-size: 2.5vh;
-}
-
-.title > h1 {
-  margin: 2vh 2vh 4vh 2vh;
 
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -25,77 +14,96 @@
   -o-user-select: none;
   user-select: none;
   cursor: default;
+  font-size: 3vh;
 }
 
-.main {
+.letters {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   align-content: stretch;
+  padding-bottom: 1em;
 }
 
-.middleElement {
-  background-color: #333132;
-  border-radius: 30px;
-  padding: 2vh;
-
+.letters > span {
+  margin: 0 1.5vh 3vh 1.5vh;
+}
+.letter {
+  width: 4vh;
+  height: 4vh;
   text-align: center;
 }
 
-.start_button {
-  width: 20vh;
-  height: 5vh;
-  border-radius: 10px;
-  background-color: #9251ed;
-  color: #fff;
+.button {
+  width: 35vh;
+  border-radius: 20px;
+  border: 10px solid #589bff;
+  background: #262425;
+  color: #589bff;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+
+  padding: 10px 0 10px 0;
+  margin-bottom: 2vh;
+}
+
+.button > h1 {
+  font-size: 3vh;
+  font-weight: bold;
+  text-align: center;
   cursor: pointer;
-  border: 0;
-  margin-bottom: 3em;
-
-  font-size: 1.5vh;
-  font-family: "Press Start 2P", cursive;
 }
 
-.start_buttons {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: stretch;
+.button:hover {
+  border: 10px solid #589bff;
+  background: #589bff;
+  color: #262425;
+  animation: changeColor 200ms ease-in-out 0s forwards;
 }
 
-.start_button:hover {
-  animation: changeColor 0.2s ease-in-out 0s forwards;
+.disabled {
+  width: 35vh;
+  border-radius: 20px;
+  border: 10px solid #414141;
+  background: #262425;
+  color: #383838;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  cursor: no-drop;
+
+  padding: 10px 0 10px 0;
+  margin-bottom: 2vh;
 }
 
-.search-input-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
-  align-content: stretch;
-}
-
-.search {
-  width: 20vh;
-}
-
-.suggestionList {
-  width: 20vh;
-  background: white;
-  color: black;
+.highscore {
+  color: #589bff;
 }
 
 @keyframes changeColor {
   from {
-    background-color: #9251ed;
+    background: #262425;
+    color: #589bff;
   }
-
   to {
-    background-color: #761df3;
+    background: #589bff;
+    color: #262425;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .main {
+    zoom: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .main {
+    zoom: 55%;
+  }
+}
+@media only screen and (max-width: 390px) {
+  .main {
+    zoom: 45%;
   }
 }

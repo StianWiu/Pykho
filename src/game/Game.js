@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import styles from "./game.module.css"
-import "./game.letters.css"
+import "../letters.css"
 
 let startGame = false
 const data = require('../words.json');
@@ -11,6 +11,13 @@ const getIp = async () => {
     const res = await axios.get('https://geolocation-db.com/json/')
     const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
     return (ip)
+}
+
+const changeScreen = (val) => {
+    if (val === "back") {
+        sessionStorage.setItem('screen', "start");
+        window.location.reload();
+    }
 }
 
 class Game extends Component {
@@ -26,6 +33,7 @@ class Game extends Component {
             words: data,
             nonExistent: [],
             points: 0,
+            typed: false
         }
 
         this.sendData = async () => {
@@ -46,12 +54,12 @@ class Game extends Component {
 
         this.startGame = async () => {
             let gameOver = false
-            let delay = localStorage.getItem('Difficulty')
+            let delay = localStorage.getItem('difficulty')
             while (gameOver === false) {
-                if (delay && isNaN(delay) === false) {
-                    await new Promise((resolve) => setTimeout(resolve, delay));
+                if (!delay) {
+                    await new Promise((resolve) => setTimeout(resolve, 1500));
                 } else {
-                    await new Promise((resolve) => setTimeout(resolve, localStorage.getItem('Difficulty')));
+                    await new Promise((resolve) => setTimeout(resolve, delay));
                 }
                 let tempGameTable = this.state.gameTable;
                 let randomNumber2 = Math.floor(Math.random() * 5);
@@ -62,7 +70,11 @@ class Game extends Component {
                     if (lowest === -1) {
                         gameOver = true
                         this.sendData()
-                        window.location.href = "/over?" + this.state.points;
+                        sessionStorage.setItem('screen', "start")
+                        if (this.state.points > localStorage.getItem('highscore')) {
+                            localStorage.setItem('highscore', this.state.points)
+                        }
+                        window.location.reload();
                     }
                 }
 
@@ -85,7 +97,6 @@ class Game extends Component {
                     if (temp.includes(tempGameTable[i][j])) {
                         inputArray.splice(inputArray.indexOf(tempGameTable[i][j]), 1);
                         tempGameTable[i][j] = 3;
-
                         points++;
                     }
                 }
@@ -109,6 +120,11 @@ class Game extends Component {
             })
         }
         this.inputText = (e) => {
+            if (this.state.typed === false) {
+                this.setState({
+                    typed: true
+                })
+            }
             if (e.key === 'Enter') {
                 let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                 let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
@@ -143,6 +159,14 @@ class Game extends Component {
             startGame = true;
         }
 
+        this.inputField = () => {
+            if (this.state.typed) {
+                return this.state.points
+            } else {
+                return "Start typing"
+            }
+        }
+
     }
     render() {
 
@@ -161,14 +185,14 @@ class Game extends Component {
                         )
                     })}
 
-                    <input className={styles.input_field} onPaste={(e) => {
+                    <input autoFocus className={styles.input_field} onPaste={(e) => {
                         e.preventDefault()
                         return false;
                     }} onCopy={(e) => {
                         e.preventDefault()
                         return false;
-                    }} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
-                    <h1>{this.state.points}</h1>
+                    }} placeholder={this.inputField()} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
+                    <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                 </div>
             </div >
         )
@@ -181,3 +205,8 @@ export default Game;
 // localStorage.getItem('myData'); // get data
 // localStorage.removeItem('myData'); // remove data
 // localStorage.clear(); // remove all data
+
+// sessionStorage.setItem('key', 'value'); // set data
+// sessionStorage.getItem('key'); // get data
+// sessionStorage.removeItem('key'); // remove data
+// sessionStorage.clear(); // remove all data

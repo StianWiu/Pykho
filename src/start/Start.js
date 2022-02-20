@@ -1,43 +1,38 @@
-import letters from "../letters.module.css";
+import "../letters.css";
 import styles from "./start.module.css";
-import SuggestionInputSearch from 'suggestion-react-input-search';
 
-const setDifficulty = (difficulty) => {
-    localStorage.setItem("Difficulty", difficulty);
-    window.location.href = "/game";
-};
+const changeScreen = (val) => {
+    if (val === "play") {
+        sessionStorage.setItem('screen', "game");
+        window.location.reload();
+    } else if (val === "settings") {
+        sessionStorage.setItem('screen', "settings");
+        window.location.reload();
+    }
+}
+
+const getHighscore = () => {
+    if (parseInt(localStorage.getItem('highscore')) === 0) {
+        return;
+    } else {
+        return localStorage.getItem("highscore");
+    }
+}
 
 export default function Start() {
-    function handleOnSubmit(term) {
-        console.log("hello world")
-    }
-
-    const recentSearches = ['star wars', 'star wars IV', 'star trek', 'star wars I'];
-    const placeholder = 'Search films...';
-    const inputPosition = 'center';
-
     return (
         <div className={styles.main}>
-            <div className={styles.middleElement}>
-                <div className={styles.title}>
-                    <h1>
-                        <span className={letters.letter_p}>P</span>
-                        <span className={letters.letter_y}>Y</span>
-                        <span className={letters.letter_k}>K</span>
-                        <span className={letters.letter_h}>H</span>
-                        <span className={letters.letter_o}>O</span>
-                    </h1>
-                    <SuggestionInputSearch
-                        onSubmitFunction={() => handleOnSubmit}
-                        recentSearches={recentSearches}
-                        placeholder={placeholder}
-                        inputPosition={inputPosition}
-                        inputClass={styles.search}
-                        suggestionListClass={styles.suggestionList}
-                    />
-                    <p>Game developed by Pignuuu</p>
-                </div>
+            <div className={styles.letters}>
+                <span className="letter-p"><span className={styles.letter}>P</span></span>
+                <span className="letter-y"><span className={styles.letter}>Y</span></span>
+                <span className="letter-k"><span className={styles.letter}>K</span></span>
+                <span className="letter-h"><span className={styles.letter}>H</span></span>
+                <span className="letter-o"><span className={styles.letter}>O</span></span>
             </div>
-        </div>
+            <button onClick={() => changeScreen("settings")} className={styles.button}><h1>Settings →</h1></button>
+            <button onClick={() => changeScreen("play")} className={styles.button}><h1>Play →</h1></button>
+            <button className={styles.disabled}><h1>Login →</h1></button>
+            <h3 className={styles.highscore}>{getHighscore()}</h3>
+        </div >
     );
 }
