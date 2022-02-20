@@ -20,7 +20,6 @@ async function main(data, ip) {
             "time": new Date(),
             "ip": ip
         })
-        console.log("Connected to server and successfully appended data");
     } catch (e) {
         console.error(e, new Date());
     } finally {
@@ -48,7 +47,6 @@ app.post('/server/', function (req, res) {
         return res.send("No data");
     } else {
         main(req.body.data, req.body.ip)
-        console.log(req.body.ip)
         console.log(`Post request received | ${new Date()}`)
         return res.send("Request received.");
     }
