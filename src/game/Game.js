@@ -178,8 +178,9 @@ class Game extends Component {
                     if (response.data.length > 0) {
                         for (let s = 0; s <= response.data.length; s++) {
                             await new Promise((resolve) => setTimeout(resolve, 2000));
-                            let e = response.data[s].toString();
+                            let e = response.data[s]
                             console.log(e)
+                            let e = e.toString();
                             let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                             let inputString = e.toUpperCase();;
                             let wordArray = inputString.split("");
