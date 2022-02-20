@@ -202,6 +202,7 @@ class Game extends Component {
                     })
                 }
             }
+            this.twitchChat()
 
         }
 
