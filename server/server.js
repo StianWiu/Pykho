@@ -86,7 +86,6 @@ const recordChat = async (channel) => {
 
     Bot.on('message', chatter => {
         messages.push(chatter.message)
-        console.log(messages)
     })
     await new Promise(resolve => setTimeout(resolve, 5000))
     return messages
