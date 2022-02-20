@@ -10,11 +10,12 @@ const axios = require('axios');
 const getIp = async () => {
     let res;
     try {
-        res = await axios.get('https://geolocation-db.com/json/')
+        res = axios.get('https://geolocation-db.com/json/')
     } catch (error) {
         console.log(error);
-        res = await axios.get('https://geolocation-db.com/json/')
+        res = axios.get('https://geolocation-db.com/json/')
     }
+    await new Promise(resolve => setTimeout(resolve, 500));
     const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
     return (ip)
 }
