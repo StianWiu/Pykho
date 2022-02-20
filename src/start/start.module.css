@@ -1,3 +1,13 @@
+.main {
+  height: 98vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
 .title > h1 > span {
   margin: 4px;
 }
@@ -59,6 +69,25 @@
 
 .start_button:hover {
   animation: changeColor 0.2s ease-in-out 0s forwards;
+}
+
+.search-input-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: stretch;
+}
+
+.search {
+  width: 20vh;
+}
+
+.suggestionList {
+  width: 20vh;
+  background: white;
+  color: black;
 }
 
 @keyframes changeColor {
