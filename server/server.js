@@ -52,7 +52,7 @@ app.post('/api/new-word', function (req, res) {
     }
 });
 
-app.post('/api/twitch', function (req, res) {
+app.post('/api/twitch', async function (req, res) {
     if (!req.body.username) {
         return res.send("No data");
     } else {
