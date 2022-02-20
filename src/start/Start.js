@@ -8,6 +8,9 @@ const changeScreen = (val) => {
     } else if (val === "settings") {
         sessionStorage.setItem('screen', "settings");
         window.location.reload();
+    } else if (val === "info") {
+        sessionStorage.setItem('screen', "info");
+        window.location.reload();
     }
 }
 
@@ -30,7 +33,12 @@ export default function Start() {
                 <span className="letter-o"><span className={styles.letter}>O</span></span>
             </div>
             <button onClick={() => changeScreen("settings")} className={styles.button}><h1>Settings →</h1></button>
-            <button onClick={() => changeScreen("play")} className={styles.button}><h1>Play →</h1></button>
+            <div>
+                <button onClick={() => changeScreen("info")} className={styles.info_button}><h1>ℹ</h1></button>
+                <span className={styles.extraMargin}>
+                    <button onClick={() => changeScreen("play")} className={styles.button}><h1>Play →</h1></button>
+                </span>
+            </div>
             <button className={styles.disabled}><h1>Stats →</h1></button>
             <button className={styles.disabled}><h1>Login →</h1></button>
             <h3 className={styles.highscore}>{getHighscore()}</h3>

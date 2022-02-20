@@ -4,6 +4,7 @@ import "./index.css"
 import Game from './game/Game';
 import Start from './start/Start';
 import Settings from './settings/Settings';
+import Info from './info/Info.js';
 import Error from './Error';
 
 if (!navigator.cookieEnabled) {
@@ -30,4 +31,6 @@ if (sessionStorage.getItem('screen') === "start") {
     ReactDOM.render(<Game />, document.getElementById('root'));
 } else if (sessionStorage.getItem('screen') === "settings") {
     ReactDOM.render(<Settings />, document.getElementById('root'));
+} else if (sessionStorage.getItem('screen') === "info") {
+    ReactDOM.render(<Info />, document.getElementById('root'));
 }

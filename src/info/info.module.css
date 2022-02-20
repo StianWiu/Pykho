@@ -1,0 +1,13 @@
+.info {
+  border-radius: 20px;
+  border: 10px solid #589bff;
+  background: #262425;
+  color: #589bff;
+  font-family: "Source Code Pro", monospace;
+  font-size: 20px;
+
+  padding: 20px;
+  margin-bottom: 2vh;
+
+  max-width: 30vh;
+}
