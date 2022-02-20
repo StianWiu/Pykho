@@ -174,7 +174,7 @@ class Game extends Component {
                     }).then(async (response) => {
                         console.log(response.data)
                         if (response.data.length > 0) {
-                            for (s = 0; s <= response.data.length; s++) {
+                            for (let s = 0; s <= response.data.length; s++) {
                                 await new Promise((resolve) => setTimeout(resolve, 2000));
                                 e = response.data[i];
                                 console.log(e)
