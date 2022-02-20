@@ -180,7 +180,6 @@ class Game extends Component {
                             await new Promise((resolve) => setTimeout(resolve, 2000));
                             let e = response.data[s]
                             console.log(e)
-                            e = e.toString();
                             let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                             let inputString = e.toUpperCase();;
                             let wordArray = inputString.split("");
@@ -199,6 +198,11 @@ class Game extends Component {
                                 if (exists === false) {
                                     return;
                                 }
+                            }
+                            if (this.state.words[0].includes(inputString.toLowerCase())) {
+                                this.removeLetter(wordArray);
+                            } else {
+                                this.state.nonExistent.push(inputString.toLowerCase())
                             }
                         }
                     }
