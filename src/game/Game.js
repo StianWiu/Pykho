@@ -182,6 +182,7 @@ class Game extends Component {
                             console.log(e)
                             let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                             let inputString = e.toUpperCase();;
+                            e = "";
                             let wordArray = inputString.split("");
                             for (let i = 0; i < wordArray.length; i++) {
                                 let exists = false;
