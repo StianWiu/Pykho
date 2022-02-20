@@ -41,7 +41,7 @@ async function createData(client, newListing) {
 
 // Receive data from client
 
-app.post('/server/', function (req, res) {
+app.post('/api/new-word', function (req, res) {
     if (!req.body.data[0]) {
         console.log(`Post request received but had no data | ${new Date()}`)
         return res.send("No data");
@@ -57,3 +57,29 @@ app.post('/server/', function (req, res) {
 app.listen(port, function () {
     console.log(`Server listening on port ${port} | ${new Date()}`);
 });
+
+
+const recordChat = async (channel) => {
+    let messages = [];
+    const TwitchBot = require('twitch-bot')
+    const Bot = new TwitchBot({
+        username: 'pykhodev',
+        oauth: `oauth:${process.env.oauth}`,
+        channels: [`${channel}`]
+    })
+
+    Bot.on('join', channel => {
+        console.log(`Joined channel: ${channel}`)
+    })
+
+    Bot.on('error', err => {
+        console.log(err)
+    })
+
+    Bot.on('message', chatter => {
+        messages.push(chatter.message)
+        console.log(messages)
+    })
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    return messages
+}
