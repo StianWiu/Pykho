@@ -46,7 +46,7 @@ class Game extends Component {
 
         this.startGame = async () => {
             let gameOver = false
-            let delay = document.location.toString().split("?").slice(1).join("?")
+            let delay = localStorage.getItem('Difficulty')
             while (gameOver === false) {
                 if (delay && isNaN(delay) === false) {
                     await new Promise((resolve) => setTimeout(resolve, delay));
@@ -67,7 +67,6 @@ class Game extends Component {
                 }
 
                 tempGameTable[lowest][randomNumber2] = this.state.letters[randomNumberAlphabet];
-
                 this.setState({
                     gameTable: tempGameTable
                 })
@@ -145,7 +144,6 @@ class Game extends Component {
         }
 
     }
-
     render() {
 
         return (
