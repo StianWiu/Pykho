@@ -129,7 +129,6 @@ class Game extends Component {
             })
         }
         this.inputText = (e) => {
-            console.log(e)
             if (this.state.typed === false) {
                 this.setState({
                     typed: true
@@ -175,7 +174,6 @@ class Game extends Component {
                         ["username"]: sessionStorage.twitchUsername,
                     }
                 }).then(async (response) => {
-                    console.log(response.data)
                     if (response.data.length > 0) {
                         for (let s = 0; s < response.data.length; s++) {
                             console.log(response.data[s])
