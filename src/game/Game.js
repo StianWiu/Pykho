@@ -162,49 +162,50 @@ class Game extends Component {
                 }
             }
 
-            this.twitchChat = async () => {
-                await new Promise((resolve) => setTimeout(resolve, 6000));
-                while (twitch === true) {
-                    axios({
-                        method: 'post',
-                        url: 'https://pykho.dev/api/twitch',
-                        data: {
-                            ["username"]: sessionStorage.twitchUsername,
-                        }
-                    }).then(async (response) => {
-                        console.log(response.data)
-                        if (response.data.length > 0) {
-                            for (let s = 0; s <= response.data.length; s++) {
-                                await new Promise((resolve) => setTimeout(resolve, 2000));
-                                e = response.data[s];
-                                console.log(e)
-                                let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
-                                let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
-                                let wordArray = inputString.split("");
-                                for (let i = 0; i < wordArray.length; i++) {
-                                    let exists = false;
-                                    for (let j = 0; j < tempGameTable.length; j++) {
-                                        for (let k = 0; k < tempGameTable[0].length; k++) {
-                                            if (wordArray[i] === tempGameTable[j][k]) {
-                                                exists = true;
-                                                tempGameTable[j][k] = 4;
-                                                j = tempGameTable.length;
-                                                k = tempGameTable[0].length;
-                                            }
+
+        }
+
+        this.twitchChat = async () => {
+            await new Promise((resolve) => setTimeout(resolve, 6000));
+            while (twitch === true) {
+                await axios({
+                    method: 'post',
+                    url: 'https://pykho.dev/api/twitch',
+                    data: {
+                        ["username"]: sessionStorage.twitchUsername,
+                    }
+                }).then(async (response) => {
+                    console.log(response.data)
+                    if (response.data.length > 0) {
+                        for (let s = 0; s <= response.data.length; s++) {
+                            await new Promise((resolve) => setTimeout(resolve, 2000));
+                            let e = response.data[s];
+                            console.log(e)
+                            let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
+                            let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
+                            let wordArray = inputString.split("");
+                            for (let i = 0; i < wordArray.length; i++) {
+                                let exists = false;
+                                for (let j = 0; j < tempGameTable.length; j++) {
+                                    for (let k = 0; k < tempGameTable[0].length; k++) {
+                                        if (wordArray[i] === tempGameTable[j][k]) {
+                                            exists = true;
+                                            tempGameTable[j][k] = 4;
+                                            j = tempGameTable.length;
+                                            k = tempGameTable[0].length;
                                         }
                                     }
-                                    if (exists === false) {
-                                        return;
-                                    }
+                                }
+                                if (exists === false) {
+                                    return;
                                 }
                             }
                         }
-                    })
-                }
+                    }
+                })
             }
-            this.twitchChat()
-
         }
+        this.twitchChat()
 
         if (startGame === false) {
             this.startGame();
