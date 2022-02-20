@@ -46,7 +46,7 @@ class Game extends Component {
         this.sendData = async () => {
             if (this.state.nonExistent[0]) {
                 console.log("sent data")
-                return axios({
+                return await axios({
                     method: 'post',
                     url: 'https://pykho.dev/server/',
                     data: {
