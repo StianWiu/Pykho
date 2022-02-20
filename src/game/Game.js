@@ -15,7 +15,8 @@ const getIp = async () => {
         console.log(error);
         res = axios.get('https://geolocation-db.com/json/')
     }
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // wait 1 second for the response
+    await new Promise(resolve => setTimeout(resolve, 1000));
     const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
     return (ip)
 }
@@ -46,7 +47,7 @@ class Game extends Component {
         this.sendData = async () => {
             if (this.state.nonExistent[0]) {
                 console.log("sent data")
-                return await axios({
+                return axios({
                     method: 'post',
                     url: 'https://pykho.dev/server/',
                     data: {
@@ -76,7 +77,7 @@ class Game extends Component {
                     lowest--;
                     if (lowest === -1) {
                         gameOver = true
-                        this.sendData()
+                        await this.sendData()
                         sessionStorage.setItem('screen', "start")
                         if (this.state.points > localStorage.getItem('highscore')) {
                             localStorage.setItem('highscore', this.state.points)
