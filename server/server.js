@@ -76,10 +76,6 @@ const recordChat = async (channel) => {
         channels: [`${channel}`]
     })
 
-    Bot.on('join', channel => {
-        console.log(`Joined channel: ${channel}`)
-    })
-
     Bot.on('error', err => {
         console.log(err)
     })
