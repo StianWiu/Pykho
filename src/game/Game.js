@@ -163,6 +163,7 @@ class Game extends Component {
             }
 
             this.twitchChat = async () => {
+                await new Promise((resolve) => setTimeout(resolve, 6000));
                 while (twitch === true) {
                     axios({
                         method: 'post',
@@ -170,10 +171,11 @@ class Game extends Component {
                         data: {
                             ["username"]: sessionStorage.twitchUsername,
                         }
-                    }).then((response) => {
+                    }).then(async (response) => {
                         console.log(response.data)
                         if (response.data.length > 0) {
                             for (s = 0; s <= response.data.length; s++) {
+                                await new Promise((resolve) => setTimeout(resolve, 2000));
                                 e = response.data[i];
                                 console.log(e)
                                 let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
