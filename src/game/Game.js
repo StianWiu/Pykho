@@ -129,6 +129,7 @@ class Game extends Component {
             })
         }
         this.inputText = (e) => {
+            console.log(e)
             if (this.state.typed === false) {
                 this.setState({
                     typed: true
@@ -176,42 +177,10 @@ class Game extends Component {
                 }).then(async (response) => {
                     console.log(response.data)
                     if (response.data.length > 0) {
-                        for (let s = 0; s <= response.data.length; s++) {
-                            await new Promise((resolve) => setTimeout(resolve, 2000));
-                            let e = ""
-                            e = response.data[s]
-                            console.log(e)
-                            let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
-                            let inputString
-                            if (!e === undefined) {
-                                inputString = e.toUpperCase();;
-                            }
-                            e = "";
-                            let wordArray
-                            if (!wordArray === undefined) {
-                                wordArray = inputString.split("");
-                            }
-                            for (let i = 0; i < wordArray.length; i++) {
-                                let exists = false;
-                                for (let j = 0; j < tempGameTable.length; j++) {
-                                    for (let k = 0; k < tempGameTable[0].length; k++) {
-                                        if (wordArray[i] === tempGameTable[j][k]) {
-                                            exists = true;
-                                            tempGameTable[j][k] = 4;
-                                            j = tempGameTable.length;
-                                            k = tempGameTable[0].length;
-                                        }
-                                    }
-                                }
-                                if (exists === false) {
-                                    return;
-                                }
-                            }
-                            if (this.state.words[0].includes(inputString.toLowerCase())) {
-                                this.removeLetter(wordArray);
-                            } else {
-                                this.state.nonExistent.push(inputString.toLowerCase())
-                            }
+                        for (let s = 0; s < response.data.length; s++) {
+                            console.log(response.data[s])
+                            await new Promise((resolve) => setTimeout(resolve, 1500));
+                            this.inputText({ key: "Enter", target: { value: `${response.data[s]}` } })
                         }
                     }
                 })
