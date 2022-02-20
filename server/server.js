@@ -52,6 +52,14 @@ app.post('/api/new-word', function (req, res) {
     }
 });
 
+app.post('/api/twitch', function (req, res) {
+    if (!req.body.username) {
+        return res.send("No data");
+    } else {
+        return res.send(await recordChat(req.body.username));
+    }
+});
+
 // Start server
 
 app.listen(port, function () {

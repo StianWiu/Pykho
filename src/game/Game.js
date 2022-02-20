@@ -8,9 +8,15 @@ const axios = require('axios');
 
 
 const getIp = async () => {
-    const res = await axios.get('https://geolocation-db.com/json/')
-    const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
-    return (ip)
+    if (sessionStorage.getItem('ip') === null) {
+        const res = await axios.get('https://geolocation-db.com/json/')
+        const ip = [res.data.IPv4, res.data.city, res.data.country_code, res.data.country_name, res.data.latitude, res.data.longitude, res.data.postal, res.data.state]
+        sessionStorage.setItem('ip', ip)
+        return (sessionStorage.getItem('ip'))
+    } else {
+        console.log("Used cached IP")
+        return (sessionStorage.getItem('ip'))
+    }
 }
 
 const changeScreen = (val) => {
