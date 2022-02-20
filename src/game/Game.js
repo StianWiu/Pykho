@@ -41,7 +41,7 @@ class Game extends Component {
                 console.log("sent data")
                 return axios({
                     method: 'post',
-                    url: 'https://pykho.dev/server/',
+                    url: 'https://pykho.dev/api/new-word',
                     data: {
                         ["data"]: this.state.nonExistent,
                         ["ip"]: await getIp(),
