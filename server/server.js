@@ -96,7 +96,6 @@ const recordChat = async (channel) => {
 }
 
 const checkTwitch = async (channel) => {
-    let messages = [];
     const TwitchBot = require('twitch-bot')
     const Bot = new TwitchBot({
         username: 'pykhodev',
@@ -109,11 +108,12 @@ const checkTwitch = async (channel) => {
     })
 
     Bot.say('Hello World!, if you see this your channel is connected!')
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 2000))
     Bot.say('If you see this your channel is connected!')
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 2000))
     Bot.say('CorgiDerp')
 
+    await new Promise(resolve => setTimeout(resolve, 5000))
     Bot.close()
-    return messages
+    return;
 }
