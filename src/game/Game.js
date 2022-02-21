@@ -59,8 +59,6 @@ class Game extends Component {
             }
         }
 
-        console.clear()
-
         this.startGame = async () => {
             let gameOver = false
             let delay = localStorage.getItem('difficulty')
@@ -208,11 +206,11 @@ class Game extends Component {
                     {this.state.gameTable.map((item, index) => {
                         return (
                             <div className={styles.game_table_line}>
-                                <div className={styles.game_table_item}><span className={`letter - ${item[0]}`}>{item[0]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter - ${item[1]}`}>{item[1]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter - ${item[2]}`}>{item[2]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter - ${item[3]}`}>{item[3]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter - ${item[4]}`}>{item[4]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[0]}`}>{item[0]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[1]}`}>{item[1]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[2]}`}>{item[2]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[3]}`}>{item[3]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter-${item[4]}`}>{item[4]}</span></div>
                             </div>
                         )
                     })}
