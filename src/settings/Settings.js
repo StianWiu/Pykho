@@ -22,6 +22,7 @@ const testTwitch = async () => {
     let cooldown = sessionStorage.getItem("twitch_cooldown");
     if (cooldown) {
         if (Date.now() - cooldown < 60000) {
+            window.alert("This button has a 1 minute cool down.");
             return;
         }
     }
