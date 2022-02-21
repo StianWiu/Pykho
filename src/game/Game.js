@@ -176,9 +176,9 @@ class Game extends Component {
                 }).then(async (response) => {
                     if (response.data.length > 0) {
                         for (let s = 0; s < response.data.length; s++) {
-                            console.log(response.data[s])
+                            console.log(`${response.data[s][0]}: ${response.data[s][1]}`)
                             await new Promise((resolve) => setTimeout(resolve, 1500));
-                            this.inputText({ key: "Enter", target: { value: `${response.data[s]}` } })
+                            this.inputText({ key: "Enter", target: { value: `${response.data[s][1]}` } })
                         }
                     }
                 })
@@ -208,11 +208,11 @@ class Game extends Component {
                     {this.state.gameTable.map((item, index) => {
                         return (
                             <div className={styles.game_table_line}>
-                                <div className={styles.game_table_item}><span className={`letter-${item[0]}`}>{item[0]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter-${item[1]}`}>{item[1]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter-${item[2]}`}>{item[2]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter-${item[3]}`}>{item[3]}</span></div>
-                                <div className={styles.game_table_item}><span className={`letter-${item[4]}`}>{item[4]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter - ${item[0]}`}>{item[0]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter - ${item[1]}`}>{item[1]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter - ${item[2]}`}>{item[2]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter - ${item[3]}`}>{item[3]}</span></div>
+                                <div className={styles.game_table_item}><span className={`letter - ${item[4]}`}>{item[4]}</span></div>
                             </div>
                         )
                     })}

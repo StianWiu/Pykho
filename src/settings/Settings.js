@@ -1,6 +1,7 @@
 import styles from "../start/start.module.css";
 import setting from "./setting.module.css";
 import React, { Component } from "react"
+import axios from 'axios';
 import "../letters.css";
 
 const getDifficulty = () => {
@@ -12,6 +13,26 @@ const changeScreen = (val) => {
         sessionStorage.setItem('screen', "start");
         window.location.reload();
     }
+}
+const testTwitch = async () => {
+    // Set 1 minute cooldown on function using sessionStorage
+    if (sessionStorage.getItem("twitchUsername") === null || sessionStorage.getItem("twitchUsername") === "") {
+        return window.alert("You haven't set a twitch username yet.\n\n dummy");
+    }
+    let cooldown = sessionStorage.getItem("twitch_cooldown");
+    if (cooldown) {
+        if (Date.now() - cooldown < 60000) {
+            return;
+        }
+    }
+    sessionStorage.setItem("twitch_cooldown", Date.now());
+    axios({
+        method: 'post',
+        url: 'https://pykho.dev/api/twitch-test',
+        data: {
+            ["username"]: sessionStorage.twitchUsername,
+        }
+    }).then((response) => console.log((response.data)))
 }
 
 class Start extends Component {
@@ -62,8 +83,11 @@ class Start extends Component {
                     <input min={0.1} type={"number"} defaultValue={this.state.difficulty} onInput={(e) => this.changeDifficulty(e)} className={setting.num_input}></input>
                     <h3>Delay</h3>
                 </div>
-                <div className={setting.difficulty}>
-                    <input defaultValue={this.checkTwitchUsername()} placeholder={"Twitch Chat"} onInput={(e) => this.setTwitchUsername(e)} className={setting.text_input}></input>
+                <div>
+                    <button onClick={() => testTwitch()} className={styles.info_button}><h1>🛰️</h1></button>
+                    <span className={styles.extraMargin}>
+                        <input defaultValue={this.checkTwitchUsername()} placeholder={"Twitch Chat"} onInput={(e) => this.setTwitchUsername(e)} className={setting.text_input}></input>
+                    </span>
                 </div>
                 <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
             </div >

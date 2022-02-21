@@ -27,7 +27,7 @@
 }
 .text_input {
   text-align: center;
-  width: 35vh;
+  width: 33vh;
   height: 4vh;
   border-radius: 20px;
   border: 10px solid #589bff;
@@ -37,6 +37,7 @@
   font-weight: bold;
   font-size: 2.5vh;
 
+  margin-bottom: 2vh;
   padding: 10px 0 10px 0;
 }
 

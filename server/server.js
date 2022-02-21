@@ -59,6 +59,13 @@ app.post('/api/twitch', async function (req, res) {
         return res.send(await recordChat(req.body.username));
     }
 });
+app.post('/api/twitch-test', async function (req, res) {
+    if (!req.body.username) {
+        return res.send("No data");
+    } else {
+        return res.send(await checkTwitch(req.body.username));
+    }
+});
 
 // Start server
 
@@ -81,9 +88,32 @@ const recordChat = async (channel) => {
     })
 
     Bot.on('message', chatter => {
-        messages.push(chatter.message)
+        messages.push([chatter.username, chatter.message])
     })
     await new Promise(resolve => setTimeout(resolve, 5000))
+    Bot.close()
+    return messages
+}
+
+const checkTwitch = async (channel) => {
+    let messages = [];
+    const TwitchBot = require('twitch-bot')
+    const Bot = new TwitchBot({
+        username: 'pykhodev',
+        oauth: `oauth:${process.env.oauth}`,
+        channels: [`${channel}`]
+    })
+
+    Bot.on('error', err => {
+        console.log(err)
+    })
+
+    Bot.say('Hello World!, if you see this your channel is connected!')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    Bot.say('If you see this your channel is connected!')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    Bot.say('CorgiDerp')
+
     Bot.close()
     return messages
 }
