@@ -108,9 +108,7 @@ const checkTwitch = async (channel) => {
     })
 
     await new Promise(resolve => setTimeout(resolve, 2000))
-    Bot.say('Hello World!, if you see this your channel is connected!')
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    Bot.say('If you see this your channel is connected!')
+    Bot.say('If you see this your channel is connected! If you did not expect to see this message someone connected your chat to pykho.dev')
     await new Promise(resolve => setTimeout(resolve, 2000))
     Bot.say('CorgiDerp')
 
