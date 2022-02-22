@@ -8,7 +8,7 @@
 
 .difficulty > h3 {
   margin-right: 35%;
-  color: #589bff;
+  color: #757575;
 }
 
 .num_input {
@@ -16,9 +16,9 @@
   width: 6vh;
   height: 4vh;
   border-radius: 20px;
-  border: 10px solid #589bff;
+  border: 10px solid #464772;
   background: #262425;
-  color: #589bff;
+  color: #75df75;
   font-family: "Source Code Pro", monospace;
   font-weight: bold;
   font-size: 2.5vh;
@@ -30,9 +30,9 @@
   width: 33vh;
   height: 4vh;
   border-radius: 20px;
-  border: 10px solid #589bff;
+  border: 10px solid #464772;
   background: #262425;
-  color: #589bff;
+  color: #75df75;
   font-family: "Source Code Pro", monospace;
   font-weight: bold;
   font-size: 2.5vh;

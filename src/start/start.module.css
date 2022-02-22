@@ -39,9 +39,9 @@
 .button {
   width: 35vh;
   border-radius: 20px;
-  border: 10px solid #589bff;
+  border: 10px solid #464772;
   background: #262425;
-  color: #589bff;
+  color: #757575;
   font-family: "Source Code Pro", monospace;
   font-weight: bold;
 
@@ -57,8 +57,8 @@
 }
 
 .button:hover {
-  border: 10px solid #589bff;
-  background: #589bff;
+  border: 10px solid #464772;
+  background: #464772;
   color: #262425;
   animation: changeColor 200ms ease-in-out 0s forwards;
 }
@@ -70,9 +70,9 @@
 .info_button {
   width: 9vh;
   border-radius: 20px;
-  border: 10px solid #589bff;
+  border: 10px solid #464772;
   background: #262425;
-  color: #589bff;
+  color: #757575;
   font-family: "Source Code Pro", monospace;
   font-weight: bold;
 
@@ -88,8 +88,8 @@
 }
 
 .info_button:hover {
-  border: 10px solid #589bff;
-  background: #589bff;
+  border: 10px solid #464772;
+  background: #464772;
   color: #262425;
   animation: changeColor 200ms ease-in-out 0s forwards;
 }
@@ -115,11 +115,11 @@
 @keyframes changeColor {
   from {
     background: #262425;
-    color: #589bff;
+    color: #757575;
   }
   to {
-    background: #589bff;
-    color: #262425;
+    background: #464772;
+    color: #75df75;
   }
 }
 

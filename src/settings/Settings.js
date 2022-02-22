@@ -68,8 +68,8 @@ class Start extends Component {
                 return sessionStorage.getItem("twitchUsername");
             }
         }
-
     }
+
     render() {
         return (
             <div className={styles.main}>

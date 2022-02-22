@@ -5,11 +5,11 @@
 .letter-A {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #51ceed;
-  background-color: #51ceed;
+  border: 1px solid #231651;
+  background-color: #231651;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #ce73fc;
+  color: #d6fff6;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -18,11 +18,11 @@
 .letter-B {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #88f088;
-  background-color: #88f088;
+  border: 1px solid #ff8484;
+  background-color: #ff8484;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #3d43f3;
+  color: #0069af;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -31,11 +31,11 @@
 .letter-C {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #914660;
-  background-color: #914660;
+  border: 1px solid #ff66d8;
+  background-color: #ff66d8;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #ff96dc;
+  color: #f7ec59;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -44,11 +44,11 @@
 .letter-D {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #8738bf;
-  background-color: #8738bf;
+  border: 1px solid #136f63;
+  background-color: #136f63;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #3df3ad;
+  color: #4ce0d2;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -57,11 +57,11 @@
 .letter-E {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #b33e3e;
-  background-color: #b33e3e;
+  border: 1px solid #7b63f0;
+  background-color: #7b63f0;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #73fc73;
+  color: #e2eb98;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -70,11 +70,11 @@
 .letter-F {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #eaff60;
-  background-color: #eaff60;
+  border: 1px solid #22aaa1;
+  background-color: #22aaa1;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #f33d7d;
+  color: #3c1b43;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -83,11 +83,11 @@
 .letter-G {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #feffb8;
-  background-color: #feffb8;
+  border: 1px solid #454ade;
+  background-color: #454ade;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #7381fc;
+  color: #eae8ff;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -96,11 +96,11 @@
 .letter-H {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #5195ed;
-  background-color: #5195ed;
+  border: 1px solid #24d0bc;
+  background-color: #24d0bc;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #fc7373;
+  color: #d52941;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -109,11 +109,11 @@
 .letter-I {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #b8ffba;
-  background-color: #b8ffba;
+  border: 1px solid #6cd4ff;
+  background-color: #6cd4ff;
   border-radius: 40px;
   padding: 1.7vh 2.4vh 1.7vh 2.4vh;
-  color: #7177aa;
+  color: #fe938c;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -122,11 +122,11 @@
 .letter-J {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #b8ffe6;
-  background-color: #b8ffe6;
+  border: 1px solid #d0e943;
+  background-color: #d0e943;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #ff6d6d;
+  color: #ed521e;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -135,11 +135,11 @@
 .letter-K {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #4d4a4b;
-  background-color: #4d4a4b;
+  border: 1px solid #d676ff;
+  background-color: #d676ff;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #b18aff;
+  color: #45ff98;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -148,11 +148,11 @@
 .letter-L {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #47fdbe;
-  background-color: #47fdbe;
+  border: 1px solid #de3c4b;
+  background-color: #de3c4b;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #806dff;
+  color: #87f5fb;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -161,11 +161,11 @@
 .letter-M {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #595959;
-  background-color: #595959;
+  border: 1px solid #2fbf71;
+  background-color: #2fbf71;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #f39b98;
+  color: #ef2d56;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -174,11 +174,11 @@
 .letter-N {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #007c51;
-  background-color: #007c51;
+  border: 1px solid #8cd867;
+  background-color: #8cd867;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #fdff6d;
+  color: #ed7d3a;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -187,11 +187,11 @@
 .letter-O {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #ed5185;
-  background-color: #ed5185;
+  border: 1px solid #feb95f;
+  background-color: #feb95f;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #ffffff;
+  color: #090446;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -213,11 +213,11 @@
 .letter-Q {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #51edcb;
-  background-color: #51edcb;
+  border: 1px solid #14591d;
+  background-color: #14591d;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #00a962;
+  color: #e2e46d;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -226,8 +226,8 @@
 .letter-R {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #6e4af0;
-  background-color: #6e4af0;
+  border: 1px solid #4f1271;
+  background-color: #4f1271;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
   color: #fa92f6;
@@ -239,11 +239,11 @@
 .letter-S {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #707070;
-  background-color: #707070;
+  border: 1px solid #00ffc5;
+  background-color: #00ffc5;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #34ffa7;
+  color: #0075a2;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -256,7 +256,7 @@
   background-color: #464772;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #64ff64;
+  color: #75df75;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -265,11 +265,11 @@
 .letter-U {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #ede351;
-  background-color: #ede351;
+  border: 1px solid #ada5ff;
+  background-color: #ada5ff;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #8ba6ff;
+  color: #d55672;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -278,11 +278,11 @@
 .letter-V {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #1f144d;
-  background-color: #1f144d;
+  border: 1px solid #61304b;
+  background-color: #61304b;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #a32bb3;
+  color: #88ffaa;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -291,11 +291,11 @@
 .letter-W {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #26545c;
-  background-color: #26545c;
+  border: 1px solid #176087;
+  background-color: #176087;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #3be6c7;
+  color: #f2e86d;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -304,11 +304,11 @@
 .letter-X {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #770b62;
-  background-color: #770b62;
+  border: 1px solid #ffb451;
+  background-color: #ffb451;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #f7fa52;
+  color: #00c3f8;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -317,11 +317,11 @@
 .letter-Y {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #b8ff85;
-  background-color: #b8ff85;
+  border: 1px solid #ffdd4a;
+  background-color: #ffdd4a;
   border-radius: 5px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #ff8a8a;
+  color: #094074;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -330,11 +330,11 @@
 .letter-Z {
   width: 2vh;
   height: 2vh;
-  border: 1px solid #491010;
-  background-color: #491010;
+  border: 1px solid #8332ac;
+  background-color: #8332ac;
   border-radius: 40px;
   padding: 1.7vh 2vh 1.7vh 2vh;
-  color: #f28078;
+  color: #f2d1c9;
   display: flex;
   align-items: center;
   animation: fall 1000ms ease-in-out 0s forwards;
@@ -366,11 +366,11 @@
 .letter-y {
   height: 2vh;
   width: 2vh;
-  border: 1px solid #b8ff85;
-  background-color: #b8ff85;
+  border: 1px solid #ffdd4a;
+  background-color: #ffdd4a;
   border-radius: 0.7em;
   padding: 1em;
-  color: #ff8a8a;
+  color: #094074;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -380,11 +380,11 @@
 .letter-k {
   height: 2vh;
   width: 2vh;
-  border: 1px solid #4d4a4b;
-  background-color: #4d4a4b;
+  border: 1px solid #d676ff;
+  background-color: #d676ff;
   border-radius: 0.7em;
   padding: 1em;
-  color: #b18aff;
+  color: #45ff98;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -394,11 +394,11 @@
 .letter-h {
   height: 2vh;
   width: 2vh;
-  border: 1px solid #5195ed;
-  background-color: #5195ed;
+  border: 1px solid #24d0bc;
+  background-color: #24d0bc;
   border-radius: 100px;
   padding: 1em;
-  color: #fc7373;
+  color: #d52941;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -408,11 +408,11 @@
 .letter-o {
   height: 2vh;
   width: 2vh;
-  border: 1px solid #ed5185;
-  background-color: #ed5185;
+  border: 1px solid #feb95f;
+  background-color: #feb95f;
   border-radius: 0.7em;
   padding: 1em;
-  color: #ffffff;
+  color: #090446;
   display: flex;
   justify-content: center;
   align-items: center;
