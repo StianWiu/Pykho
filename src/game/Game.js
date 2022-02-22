@@ -42,7 +42,8 @@ class Game extends Component {
             words: data,
             nonExistent: [],
             points: 0,
-            typed: false
+            typed: false,
+            chat: [["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
         }
 
         this.sendData = async () => {
@@ -159,9 +160,16 @@ class Game extends Component {
                     this.state.nonExistent.push(inputString.toLowerCase())
                 }
             }
-
-
         }
+
+        this.twitchPopup = () => {
+            if (twitch) {
+                return styles.popup
+            } else {
+                return
+            }
+        }
+
 
         this.twitchChat = async () => {
             while (twitch === true) {
@@ -176,6 +184,11 @@ class Game extends Component {
                         for (let s = 0; s < response.data.length; s++) {
                             console.log(`${response.data[s][0]}: ${response.data[s][1]}`)
                             await new Promise((resolve) => setTimeout(resolve, 1500));
+                            let chat = this.state.chat;
+                            chat.unshift([response.data[s][0], response.data[s][1]])
+                            this.setState({
+                                chat: chat
+                            })
                             this.inputText({ key: "Enter", target: { value: `${response.data[s][1]}` } })
                         }
                     }
@@ -223,6 +236,21 @@ class Game extends Component {
                         return false;
                     }} placeholder={this.inputField()} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
+                    <div className={`${this.twitchPopup()}`}>
+                        {this.state.chat[0][0]} {this.state.chat[0][1]}
+                        <br />
+                        {this.state.chat[1][0]} {this.state.chat[1][1]}
+                        <br />
+                        {this.state.chat[2][0]} {this.state.chat[2][1]}
+                        <br />
+                        {this.state.chat[3][0]} {this.state.chat[3][1]}
+                        <br />
+                        {this.state.chat[4][0]} {this.state.chat[4][1]}
+                        <br />
+                        {this.state.chat[5][0]} {this.state.chat[5][1]}
+                        <br />
+                        {this.state.chat[6][0]} {this.state.chat[6][1]}
+                    </div>
                 </div>
             </div >
         )

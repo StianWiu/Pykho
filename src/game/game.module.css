@@ -1,5 +1,6 @@
 .main {
-  height: 98vh;
+  padding-top: 5vh;
+  height: 95vh;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -12,6 +13,7 @@
   padding: 0;
   margin: 0;
 }
+
 .game_table {
   display: flex;
   flex-direction: column;
@@ -83,4 +85,18 @@
   background: #464772;
   color: #75df75;
   animation: changeColor 200ms ease-in-out 0s forwards;
+}
+
+.popup {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 15%;
+  height: 30%;
+  background: #6441a5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 100; */
+  border-radius: 20px 0 0 0px;
 }
