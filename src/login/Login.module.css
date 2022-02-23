@@ -1,0 +1,107 @@
+.text_input {
+  text-align: center;
+  width: 33vh;
+  height: 4vh;
+  border-radius: 20px;
+  border: 10px solid #464772;
+  background: #262425;
+  color: #75df75;
+  font-family: "Source Code Pro", monospace;
+  font-weight: bold;
+  font-size: 2.5vh;
+
+  margin-bottom: 2vh;
+  padding: 10px 0 10px 0;
+}
+
+.no_color {
+  color: #c7c7c7;
+}
+
+.weak_color {
+  color: #e63333;
+  animation: blink_red 0.5s infinite alternate;
+}
+
+.extra_margin {
+  margin-bottom: 5vh;
+}
+
+/* Key frame animation */
+
+@keyframes blink_red {
+  from {
+    color: #e63333;
+  }
+
+  to {
+    color: #414141;
+  }
+}
+
+.medium_color {
+  color: #fff23b;
+  animation: blink_yellow 1s infinite alternate;
+}
+@keyframes blink_yellow {
+  from {
+    color: #fff23b;
+  }
+
+  to {
+    color: #414141;
+  }
+}
+
+.shake_wrong {
+  animation: shake_wrong 0.5s;
+}
+
+@keyframes shake_wrong {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  20% {
+    transform: translate(-5px, 0px);
+  }
+
+  40% {
+    transform: translate(5px, 0px);
+  }
+  60% {
+    transform: translate(-5px, 0px);
+  }
+  80% {
+    transform: translate(5px, 0px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.strong_color {
+  color: #61e661;
+}
+
+.loggedOut {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.loggedIn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.gone {
+  display: none;
+}

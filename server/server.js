@@ -3,52 +3,128 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb')
+const bcrypt = require('bcryptjs');
+const randomstring = require("randomstring")
 require('dotenv').config()
 app.use(bodyParser.json());
-
+const uri = process.env.uri; // Grab URI from .env file
 const port = 3000; // Needs to be 3000 because of Nginx
 
-async function main(data, ip) {
-    const uri = process.env.uri;
-    const client = new MongoClient(uri)
-
-    try {
-        await client.connect();
-        let i = 0;
-        await createData(client, {
-            "data": data,
-            "time": new Date(),
-            "ip": ip
-        })
-    } catch (e) {
-        console.error(e, new Date());
-    } finally {
-        await client.close();
-    }
-}
-
-// Functions to alter database
-
-// async function listDatabases(client) {
-//     const databasesList = await client.db().admin().listDatabases()
-//     console.log(databasesList)
-// }
-
-async function createData(client, newListing) {
-    const result = await client.db("Pykho").collection("New words").insertOne(newListing);
-    console.log("New data appended with the following ID:" + result.insertedId);
-}
+// Comment this when in production
+// var cors = require('cors')
+// app.use(cors())
 
 // Receive data from client
 
-app.post('/api/new-word', function (req, res) {
+app.post('/api/new-word', async function (req, res) {
     if (!req.body.data[0]) {
         console.log(`Post request received but had no data | ${new Date()}`)
         return res.send("No data");
     } else {
-        main(req.body.data, req.body.ip)
+        const client = new MongoClient(uri)
+
+        try {
+            await client.connect();
+            await createData(client, {
+                "data": req.body.data,
+                "time": new Date(),
+                "ip": req.body.ip
+            })
+        } catch (e) {
+            console.error(e, new Date());
+        } finally {
+            await client.close();
+        }
+
         console.log(`Post request received | ${new Date()}`)
         return res.send("Request received.");
+    }
+});
+
+app.post('/api/account/register', async function (req, res) {
+    console.log(`Account creation request received | ${new Date()}`)
+    if (req.body.username && req.body.password) {
+        var salt = bcrypt.genSaltSync(10);
+        var password_hash = bcrypt.hashSync(req.body.password, salt);
+
+        const client = new MongoClient(uri)
+        try {
+            await client.connect();
+
+            if (await client.db("Pykho").collection("Accounts").findOne({ username: req.body.username }) === null) {
+                let token = randomstring.generate({ length: 33, charset: "hex", })
+                while (await client.db("Pykho").collection("Accounts").findOne({ token: token })) {
+                    token = randomstring.generate({ length: 33, charset: "hex", })
+                }
+                await client.db("Pykho").collection("Accounts").insertOne({
+                    "username": req.body.username,
+                    "password": password_hash,
+                    "created": new Date(),
+                    "token": token,
+                });
+                return res.send({ username: req.body.username, token: token });
+            } else {
+                return res.send("username already exists");
+            }
+        } catch (e) {
+            console.error(e, new Date());
+        } finally {
+            await client.close();
+        }
+    } else {
+        return res.send("No data")
+    }
+});
+
+app.post('/api/account/login', async function (req, res) {
+    console.log(`Login request received | ${new Date()}`)
+    if (req.body.username && req.body.password) {
+        const client = new MongoClient(uri)
+        try {
+            await client.connect();
+            const account = await client.db("Pykho").collection("Accounts").findOne({ username: req.body.username })
+            if (account) {
+                if (bcrypt.compareSync(req.body.password, account.password)) {
+                    return res.send({ username: req.body.username, token: account.token });
+                } else {
+                    return res.send("Incorrect password.");
+                }
+            } else {
+                return res.send("Username does not exist.");
+            }
+        } catch (e) {
+            console.error(e, new Date());
+        } finally {
+            await client.close();
+        }
+    } else {
+        return res.send("No data")
+    }
+});
+
+app.post('/api/account/login/token', async function (req, res) {
+    console.log(`Login request received | ${new Date()}`)
+    if (req.body.username && req.body.token) {
+        const client = new MongoClient(uri)
+        try {
+            await client.connect();
+            const account = await client.db("Pykho").collection("Accounts").findOne({ username: req.body.username })
+            if (account) {
+                if (account.token === req.body.token) {
+                    return res.send("Login successful.");
+                } else {
+                    return res.send("Incorrect password.");
+                }
+            } else {
+                return res.send("Username does not exist.");
+            }
+        } catch (e) {
+            console.error(e, new Date());
+        } finally {
+            await client.close();
+        }
+    } else {
+        return res.send("No data")
     }
 });
 
@@ -59,6 +135,7 @@ app.post('/api/twitch', async function (req, res) {
         return res.send(await recordChat(req.body.username));
     }
 });
+
 app.post('/api/twitch-test', async function (req, res) {
     if (!req.body.username) {
         return res.send("No data");
@@ -67,13 +144,15 @@ app.post('/api/twitch-test', async function (req, res) {
     }
 });
 
-// Start server
+// Functions
 
-app.listen(port, function () {
-    console.log(`Server listening on port ${port} | ${new Date()}`);
-});
+// Write missing words to database
+async function createData(client, newListing) {
+    const result = await client.db("Pykho").collection("New words").insertOne(newListing);
+    console.log("New data appended with the following ID:" + result.insertedId);
+}
 
-
+// Read twitch chat for 5 seconds then send back
 const recordChat = async (channel) => {
     let messages = [];
     const TwitchBot = require('twitch-bot')
@@ -95,6 +174,7 @@ const recordChat = async (channel) => {
     return messages
 }
 
+// Check if correct username is inputted by user
 const checkTwitch = async (channel) => {
     const TwitchBot = require('twitch-bot')
     const Bot = new TwitchBot({
@@ -116,3 +196,39 @@ const checkTwitch = async (channel) => {
     Bot.close()
     return;
 }
+
+const resetTokens = async () => {
+    const client = new MongoClient(uri)
+    const milliseconds = Date.now();
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    try {
+        await client.connect();
+        const reset = await client.db("Pykho").collection("Variables").findOne({ name: "last-reset" })
+        if (reset.reset + 10 < days) {
+            const result = await client.db("Pykho").collection("Accounts").updateMany({}, { $set: { token: randomstring.generate({ length: 33, charset: "hex", }) } });
+            console.log(`${result.modifiedCount} tokens were reset | ${new Date()}`);
+            await client.db("Pykho").collection("Variables").updateOne({ name: "last-reset" }, { $set: { reset: days } });
+        } else {
+            console.log("Token reset requested but not needed | " + new Date());
+            return;
+        }
+    } catch (e) {
+        console.error(e, new Date());
+    } finally {
+        await client.close();
+    }
+}
+
+resetTokens()
+setInterval(function () {
+    resetTokens()
+}, 3600000);
+
+
+// Start server
+app.listen(port, function () {
+    console.log(`Server listening on port ${port} | ${new Date()}`);
+});

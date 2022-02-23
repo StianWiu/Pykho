@@ -27,7 +27,7 @@ export default function Info() {
                     The goal of the game is to  get as many points as possible.
                     <br />
                     <br />
-                    In order to stay alive and get points you have to make words using the letters on the screen.
+                    In order to stay alive and get points you have to make words using the letters on the screen. One letter removed corresponds to one point.
                     <br />
                     <br />
                     When writing a word with those letters the letters used will be removed.
