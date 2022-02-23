@@ -246,8 +246,6 @@ class Game extends Component {
                     }} placeholder={this.inputField()} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                     <div className={`${this.twitchPopup()}`}>
-                        <center>Chat</center>
-                        <br />
                         <br />
                         {this.state.chat[0][0]} {this.state.chat[0][1]}
                         <br />
