@@ -22,8 +22,11 @@ const getIp = async () => {
     }
 }
 
-const changeScreen = (val) => {
+const changeScreen = async (val) => {
     if (val === "back") {
+        if (twitch) {
+            await this.stopTwitch()
+        }
         sessionStorage.setItem('screen', "start");
         window.location.reload();
     }
@@ -279,16 +282,16 @@ class Game extends Component {
                     }} placeholder={this.inputField()} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                     <div className={`${this.twitchPopup()}`}>
-                        <span>{this.state.chat[0][0]} {this.state.chat[0][1]}</span>
-                        <span>{this.state.chat[1][0]} {this.state.chat[1][1]}</span>
-                        <span>{this.state.chat[2][0]} {this.state.chat[2][1]}</span>
-                        <span>{this.state.chat[3][0]} {this.state.chat[3][1]}</span>
-                        <span>{this.state.chat[4][0]} {this.state.chat[4][1]}</span>
-                        <span>{this.state.chat[5][0]} {this.state.chat[5][1]}</span>
-                        <span>{this.state.chat[6][0]} {this.state.chat[6][1]}</span>
-                        <span>{this.state.chat[7][0]} {this.state.chat[7][1]}</span>
-                        <span>{this.state.chat[8][0]} {this.state.chat[8][1]}</span>
                         <span>{this.state.chat[9][0]} {this.state.chat[9][1]}</span>
+                        <span>{this.state.chat[8][0]} {this.state.chat[8][1]}</span>
+                        <span>{this.state.chat[7][0]} {this.state.chat[7][1]}</span>
+                        <span>{this.state.chat[6][0]} {this.state.chat[6][1]}</span>
+                        <span>{this.state.chat[5][0]} {this.state.chat[5][1]}</span>
+                        <span>{this.state.chat[4][0]} {this.state.chat[4][1]}</span>
+                        <span>{this.state.chat[3][0]} {this.state.chat[3][1]}</span>
+                        <span>{this.state.chat[2][0]} {this.state.chat[2][1]}</span>
+                        <span>{this.state.chat[1][0]} {this.state.chat[1][1]}</span>
+                        <span>{this.state.chat[0][0]} {this.state.chat[0][1]}</span>
                     </div>
                 </div>
             </div >
