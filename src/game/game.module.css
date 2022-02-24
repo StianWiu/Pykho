@@ -91,13 +91,24 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 15%;
-  height: 30%;
+  width: 20%;
+  height: 40%;
+  max-width: 20%;
   background: #6441a5;
+  border-radius: 20px 0 0 0px;
   display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  border-radius: 20px 0 0 0px;
+  align-content: stretch;
+}
+
+.popup > span {
+  font-size: 1em;
+  font-weight: bold;
+
+  margin-bottom: 7px;
 }
 
 .none {

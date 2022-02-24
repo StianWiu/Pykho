@@ -43,16 +43,8 @@ class Game extends Component {
             nonExistent: [],
             points: 0,
             typed: false,
-            chat: [["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""],
-            ["", ""]],
+            chat: [["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+            enteredWords: [],
         }
 
         this.sendData = async () => {
@@ -60,7 +52,8 @@ class Game extends Component {
                 console.log("sent data")
                 return axios({
                     method: 'post',
-                    url: 'https://pykho.dev/api/new-word',
+                    // url: `http://localhost:3000/api/new-words`,
+                    url: `https://pykho.dev/api/new-words`,
                     data: {
                         ["data"]: this.state.nonExistent,
                         ["ip"]: await getIp(),
@@ -88,6 +81,8 @@ class Game extends Component {
                         gameOver = true
                         await this.sendData()
                         sessionStorage.setItem('screen', "start")
+                        sessionStorage.setItem('points', this.state.points)
+                        sessionStorage.setItem('enteredWords', JSON.stringify(this.state.enteredWords))
                         if (this.state.points > localStorage.getItem('highscore')) {
                             localStorage.setItem('highscore', this.state.points)
                         }
@@ -142,7 +137,13 @@ class Game extends Component {
                     typed: true
                 })
             }
+
             if (e.key === 'Enter') {
+                let enteredWords = this.state.enteredWords;
+                enteredWords.push(e.target.value);
+                this.setState({
+                    enteredWords: enteredWords
+                })
                 let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                 let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
                 e.target.value = "";
@@ -180,31 +181,63 @@ class Game extends Component {
         }
 
 
-        this.twitchChat = async () => {
+        this.getTwitch = async () => {
             while (twitch === true) {
                 await axios({
                     method: 'post',
-                    url: 'https://pykho.dev/api/twitch',
+                    // url: `http://localhost:3000/api/twitch/get`,
+                    url: `https://pykho.dev/api/twitch/get`,
                     data: {
                         ["username"]: sessionStorage.twitchUsername,
                     }
                 }).then(async (response) => {
                     if (response.data.length > 0) {
                         for (let s = 0; s < response.data.length; s++) {
-                            console.log(`${response.data[s][0]}: ${response.data[s][1]}`)
-                            await new Promise((resolve) => setTimeout(resolve, 1500));
-                            let chat = this.state.chat;
-                            chat.unshift([response.data[s][0], response.data[s][1]])
-                            this.setState({
-                                chat: chat
-                            })
-                            this.inputText({ key: "Enter", target: { value: `${response.data[s][1]}` } })
+                            if (!response.data[s][1].includes(" ")) {
+                                console.log(`${response.data[s][0]}: ${response.data[s][1]}`)
+                                let chat = this.state.chat;
+                                chat.unshift([response.data[s][0], response.data[s][1]])
+                                this.setState({
+                                    chat: chat
+                                })
+                                this.inputText({ key: "Enter", target: { value: `${response.data[s][1]}` } })
+                                await new Promise((resolve) => setTimeout(resolve, 500));
+                            }
                         }
                     }
                 })
+                await new Promise((resolve) => setTimeout(resolve, 5000));
             }
         }
-        this.twitchChat()
+
+        this.startTwitch = async () => {
+            return axios({
+                method: 'post',
+                // url: `http://localhost:3000/api/twitch/start`,
+                url: `https://pykho.dev/api/twitch/start`,
+                data: {
+                    ["username"]: sessionStorage.twitchUsername,
+                }
+            }).then((response) => console.log((response.data)))
+        }
+
+        this.startTwitch().then(() => {
+            // wait 2 seconds before starting the twitch chat
+            setTimeout(() => {
+                this.getTwitch();
+            }, 2000);
+        })
+
+        this.stopTwitch = async () => {
+            return axios({
+                method: 'post',
+                // url: `http://localhost:3000/api/twitch/stop`,
+                url: `https://pykho.dev/api/twitch/stop`,
+                data: {
+                    ["username"]: sessionStorage.twitchUsername,
+                }
+            }).then((response) => console.log((response.data)))
+        }
 
         if (startGame === false) {
             this.startGame();
@@ -246,26 +279,16 @@ class Game extends Component {
                     }} placeholder={this.inputField()} id="myForm" spellCheck="false" onKeyPress={this.inputText} />
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                     <div className={`${this.twitchPopup()}`}>
-                        <br />
-                        {this.state.chat[0][0]} {this.state.chat[0][1]}
-                        <br />
-                        {this.state.chat[1][0]} {this.state.chat[1][1]}
-                        <br />
-                        {this.state.chat[2][0]} {this.state.chat[2][1]}
-                        <br />
-                        {this.state.chat[3][0]} {this.state.chat[3][1]}
-                        <br />
-                        {this.state.chat[4][0]} {this.state.chat[4][1]}
-                        <br />
-                        {this.state.chat[5][0]} {this.state.chat[5][1]}
-                        <br />
-                        {this.state.chat[6][0]} {this.state.chat[6][1]}
-                        <br />
-                        {this.state.chat[7][0]} {this.state.chat[7][1]}
-                        <br />
-                        {this.state.chat[8][0]} {this.state.chat[8][1]}
-                        <br />
-                        {this.state.chat[9][0]} {this.state.chat[9][1]}
+                        <span>{this.state.chat[0][0]} {this.state.chat[0][1]}</span>
+                        <span>{this.state.chat[1][0]} {this.state.chat[1][1]}</span>
+                        <span>{this.state.chat[2][0]} {this.state.chat[2][1]}</span>
+                        <span>{this.state.chat[3][0]} {this.state.chat[3][1]}</span>
+                        <span>{this.state.chat[4][0]} {this.state.chat[4][1]}</span>
+                        <span>{this.state.chat[5][0]} {this.state.chat[5][1]}</span>
+                        <span>{this.state.chat[6][0]} {this.state.chat[6][1]}</span>
+                        <span>{this.state.chat[7][0]} {this.state.chat[7][1]}</span>
+                        <span>{this.state.chat[8][0]} {this.state.chat[8][1]}</span>
+                        <span>{this.state.chat[9][0]} {this.state.chat[9][1]}</span>
                     </div>
                 </div>
             </div >
