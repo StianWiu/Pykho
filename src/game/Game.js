@@ -25,7 +25,14 @@ const getIp = async () => {
 const changeScreen = async (val) => {
     if (val === "back") {
         if (twitch) {
-            await this.stopTwitch()
+            axios({
+                method: 'post',
+                // url: `http://localhost:3000/api/twitch/stop`,
+                url: `https://pykho.dev/api/twitch/stop`,
+                data: {
+                    ["username"]: sessionStorage.twitchUsername,
+                }
+            }).then((response) => console.log((response.data)))
         }
         sessionStorage.setItem('screen', "start");
         window.location.reload();
