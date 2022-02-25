@@ -2,7 +2,7 @@ console.clear();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 // const bcrypt = require('bcryptjs');
 // const randomstring = require("randomstring")
 require('dotenv').config()
@@ -11,8 +11,8 @@ const uri = process.env.uri; // Grab URI from .env file
 const port = 3000; // Needs to be 3000 because of Nginx
 
 // Comment this when in production
-// var cors = require('cors')
-// app.use(cors())
+var cors = require('cors')
+app.use(cors())
 
 // Connect server to database
 
@@ -25,6 +25,33 @@ try {
 }
 
 // Receive data from client
+
+app.post('/api/score/save', async function (req, res) {
+    // Create document in database Pykho and collection Scores
+    const result = await client.db("Pykho").collection("Scores").insertOne({
+        "username": req.body.username,
+        "points": req.body.points,
+        "difficulty": req.body.difficulty,
+        "twitchUsername": req.body.twitchUsername,
+        "enteredWords": req.body.enteredWords,
+        "time": new Date(),
+    });
+    res.send(result.insertedId);
+});
+
+app.post('/api/score/get', async function (req, res) {
+    // Find document in database with received id
+    if (req.body.id.length === 24) {
+        const result = await client.db("Pykho").collection("Scores").find({ _id: ObjectId(req.body.id) }).toArray()
+        if (result[0]) {
+            res.send(result)
+        } else {
+            res.send("Could not find score")
+        }
+    } else {
+        res.send("Invalid score ID")
+    }
+});
 
 app.post('/api/new-words', async function (req, res) {
     if (!req.body.data[0]) {

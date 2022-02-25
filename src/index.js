@@ -11,6 +11,7 @@ import Info from './info/Info.js';
 import Error from './Error';
 // import Login from './login/Login';
 import Score from './score/Score';
+import Share from './share/Share';
 
 if (!navigator.cookieEnabled) {
     ReactDOM.render(<Error reason="cookies" />, document.getElementById('root'));
@@ -58,6 +59,11 @@ if (window.innerWidth <= 300) {
     window.alert("Your device screen is very small. You may experience issues playing this game.");
 }
 
+// Check if url contains /share/
+if (window.location.href.includes("/share/")) {
+    sessionStorage.setItem('screen', "share");
+}
+
 if (sessionStorage.getItem('screen') === "start") {
     ReactDOM.render(<Start />, document.getElementById('root'));
 } else if (sessionStorage.getItem('screen') === "game") {
@@ -68,4 +74,6 @@ if (sessionStorage.getItem('screen') === "start") {
     ReactDOM.render(<Info />, document.getElementById('root'));
 } else if (sessionStorage.getItem('screen') === "score") {
     ReactDOM.render(<Score />, document.getElementById('root'));
+} else if (sessionStorage.getItem('screen') === "share") {
+    ReactDOM.render(<Share />, document.getElementById('root'));
 }
