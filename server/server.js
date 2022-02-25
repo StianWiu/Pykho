@@ -138,7 +138,7 @@ app.post('/api/new-words', async function (req, res) {
 //     }
 // });
 
-app.post('/api/twitch-test', async function (req, res) {
+app.post('/api/twitch/test', async function (req, res) {
     if (!req.body.username) {
         return res.send("No data");
     } else {
