@@ -29,8 +29,8 @@ const testTwitch = async () => {
     sessionStorage.setItem("twitch_cooldown", Date.now());
     axios({
         method: 'post',
-        // url: 'http://localhost:3000/api/twitch-test',
-        url: 'https://pykho.dev/api/twitch-test',
+        // url: 'http://localhost:3000/api/twitch/test',
+        url: 'https://pykho.dev/api/twitch/test',
         data: {
             ["username"]: sessionStorage.twitchUsername,
         }
