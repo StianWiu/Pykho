@@ -30,7 +30,7 @@ class Score extends Component {
 
     render() {
         return (
-            <div className={styles.main}>
+            <div className={`${styles.main} ${score.main}`}>
                 <div className={styles.letters}>
                     <span className="letter-p"><span className={styles.letter}>P</span></span>
                     <span className="letter-y"><span className={styles.letter}>Y</span></span>
