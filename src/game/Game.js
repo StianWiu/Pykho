@@ -83,7 +83,7 @@ class Game extends Component {
                     if (lowest === -1) {
                         gameOver = true
                         await this.sendData()
-                        sessionStorage.setItem('screen', "start")
+                        sessionStorage.setItem('screen', "score")
                         sessionStorage.setItem('points', this.state.points)
                         sessionStorage.setItem('enteredWords', JSON.stringify(this.state.enteredWords))
                         if (this.state.points > localStorage.getItem('highscore')) {
@@ -142,11 +142,6 @@ class Game extends Component {
             }
 
             if (e.key === 'Enter') {
-                let enteredWords = this.state.enteredWords;
-                enteredWords.push(e.target.value);
-                this.setState({
-                    enteredWords: enteredWords
-                })
                 let tempGameTable = JSON.parse(JSON.stringify(this.state.gameTable))
                 let inputString = e.target.value.replace(/\s+/g, '').toUpperCase();;
                 e.target.value = "";
@@ -168,6 +163,11 @@ class Game extends Component {
                     }
                 }
                 if (this.state.words[0].includes(inputString.toLowerCase())) {
+                    let enteredWords = this.state.enteredWords;
+                    enteredWords.push(inputString.toLowerCase());
+                    this.setState({
+                        enteredWords: enteredWords
+                    })
                     this.removeLetter(wordArray);
                 } else {
                     this.state.nonExistent.push(inputString.toLowerCase())

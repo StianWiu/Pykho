@@ -1,18 +1,46 @@
+html {
+  padding-top: 10%;
+}
+
 .score {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   align-content: stretch;
 
-  background: red;
+  width: 33vh;
+  border: 10px solid #464772;
+  border-radius: 20px;
+
+  padding-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
-.points {
-  border-radius: 20px;
-  border: 10px solid #464772;
-  background: #262425;
+.value {
   color: #75df75;
   font-family: "Source Code Pro", monospace;
+}
+
+.title {
+  margin-top: 10px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.3em;
+  color: #6768a7;
+  text-align: center;
+}
+
+.smallerText {
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.8em;
+  color: #75df75;
+  text-align: center;
+}
+
+.words {
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.8em;
+  color: #75df75;
+  text-align: center;
 }
