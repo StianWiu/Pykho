@@ -17,7 +17,7 @@ if (!navigator.cookieEnabled) {
 }
 
 if (!localStorage.getItem('difficulty')) {
-    localStorage.setItem('difficulty', 1500);
+    localStorage.setItem('difficulty', 2500);
 }
 
 // if (localStorage.getItem('token') && !sessionStorage.getItem("logged-in")) {

@@ -3,16 +3,26 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb')
-const bcrypt = require('bcryptjs');
-const randomstring = require("randomstring")
+// const bcrypt = require('bcryptjs');
+// const randomstring = require("randomstring")
 require('dotenv').config()
 app.use(bodyParser.json());
 const uri = process.env.uri; // Grab URI from .env file
 const port = 3000; // Needs to be 3000 because of Nginx
 
 // Comment this when in production
-// var cors = require('cors')
-// app.use(cors())
+var cors = require('cors')
+app.use(cors())
+
+// Connect server to database
+
+const client = new MongoClient(uri)
+try {
+    client.connect()
+    console.log("Connected to database")
+} catch (e) {
+    console.log("Error connecting to database")
+}
 
 // Receive data from client
 
@@ -160,6 +170,22 @@ app.post('/api/twitch/get', async function (req, res) {
     }
 });
 
+setInterval(async function () {
+    try {
+        const collection = client.db("Pykho").collection("Twitch-stash");
+        // Find all documents in collection Twitch-stash
+        // Check if lastRequest was less than 30 seconds ago, if not remove from collection
+        const docs = await collection.find({}).toArray();
+        for (let i = 0; i < docs.length; i++) {
+            if (new Date() - docs[i].lastRequest > 30000) {
+                console.log(`Removing ${docs[i].username} from Twitch-stash`);
+                await stopChat(docs[i].username);
+            }
+        }
+    } catch (e) {
+        console.error(e, new Date());
+    }
+}, 60000);
 
 // Functions
 
@@ -171,19 +197,17 @@ async function createData(client, newListing) {
 
 const startChat = async (channel) => {
     const TwitchBot = require('twitch-bot')
-    const client = new MongoClient(uri)
-    await client.connect()
     if (await client.db("Pykho").collection("Twitch-stash").findOne({ username: channel }) === null) {
         await client.db("Pykho").collection("Twitch-stash").insertOne({
             "username": channel,
             "time": new Date(),
             "messages": [],
+            "totalMessages": 0,
         })
     } else {
-        client.close()
         return "Channel is already being monitored."
     }
-    client.close()
+    console.log(`Started monitoring chat for ${channel}'s channel | ${new Date()}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
     const Bot = new TwitchBot({
         username: 'pykhodev',
@@ -202,50 +226,30 @@ const startChat = async (channel) => {
             const account = await client.db("Pykho").collection("Twitch-stash").findOne({ username: channel })
             if (account) {
                 await client.db("Pykho").collection("Twitch-stash").updateOne({ username: channel }, { $push: { messages: [chatter.username, chatter.message] } })
+                await client.db("Pykho").collection("Twitch-stash").updateOne({ username: channel }, { $set: { totalMessages: account.totalMessages + 1 } })
             } else {
-                console.log("stopped")
                 return Bot.close()
             }
         } catch (e) {
             console.error(e, new Date());
-        } finally {
-            await client.close();
         }
     })
 
-    const interval = setInterval(async function () {
-        await client.connect();
-        const account = await client.db("Pykho").collection("Twitch-stash").findOne({ username: channel })
-        if (account.lastRequest) {
-            const timeDiff = new Date() - account.lastRequest;
-            if (timeDiff > 30000) {
-                client.close()
-                stopChat(channel)
-                Bot.close()
-                clearInterval(interval)
-                return
-            }
-        }
-    }, 30000);
     return "Chat logging started."
 }
 
 const stopChat = async (channel) => {
-    console.log("stopped")
-    const client = new MongoClient(uri)
+    console.log(`Stopped monitoring ${channel}'s chat | ${new Date()}`);
     try {
         await client.connect();
         await client.db("Pykho").collection("Twitch-stash").deleteOne({ "username": channel })
     } catch (e) {
         console.error(e, new Date());
-    } finally {
-        await client.close();
     }
     return "Chat logging stopped."
 }
 
 const getChat = async (channel) => {
-    const client = new MongoClient(uri)
     try {
         await client.connect();
         const account = await client.db("Pykho").collection("Twitch-stash").findOne({ username: channel })
@@ -260,10 +264,7 @@ const getChat = async (channel) => {
         }
     } catch (e) {
         console.error(e, new Date());
-    } finally {
-        await client.close();
     }
-
 }
 
 // Check if correct username is inputted by user
@@ -287,7 +288,6 @@ const checkTwitch = async (channel) => {
 }
 
 // const resetTokens = async () => {
-//     const client = new MongoClient(uri)
 //     const milliseconds = Date.now();
 //     const seconds = Math.floor(milliseconds / 1000);
 //     const minutes = Math.floor(seconds / 60);
@@ -306,8 +306,6 @@ const checkTwitch = async (channel) => {
 //         }
 //     } catch (e) {
 //         console.error(e, new Date());
-//     } finally {
-//         await client.close();
 //     }
 // }
 

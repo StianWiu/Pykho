@@ -49,7 +49,7 @@ class Start extends Component {
             let value = e.target.value * 1000;
 
             if (value === 0) {
-                value = 1500;
+                value = 2500;
             }
 
             localStorage.setItem("difficulty", value);
@@ -88,7 +88,7 @@ class Start extends Component {
                 <div>
                     <button onClick={() => testTwitch()} className={styles.info_button}><h1>🛰️</h1></button>
                     <span className={styles.extraMargin}>
-                        <input defaultValue={this.checkTwitchUsername()} placeholder={"Twitch Chat"} onInput={(e) => this.setTwitchUsername(e)} className={setting.text_input}></input>
+                        <input defaultValue={this.checkTwitchUsername()} placeholder={"Play with twitch chat"} onInput={(e) => this.setTwitchUsername(e)} className={setting.text_input}></input>
                     </span>
                 </div>
                 <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
