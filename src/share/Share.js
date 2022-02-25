@@ -29,8 +29,8 @@ if (window.location.href.includes("/share/") === true) {
     (async function () {
         await axios({
             method: 'post',
-            url: `http://localhost:3000/api/score/get`,
-            // url: `https://pykho.dev/api/score/get`,
+            // url: `http://localhost:3000/api/score/get`,
+            url: `https://pykho.dev/api/score/get`,
             data: {
                 ["id"]: window.location.href.split("/").pop(),
             }

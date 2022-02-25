@@ -11,8 +11,8 @@ const uri = process.env.uri; // Grab URI from .env file
 const port = 3000; // Needs to be 3000 because of Nginx
 
 // Comment this when in production
-var cors = require('cors')
-app.use(cors())
+// var cors = require('cors')
+// app.use(cors())
 
 // Connect server to database
 
