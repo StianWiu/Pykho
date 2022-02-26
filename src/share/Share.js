@@ -29,8 +29,8 @@ if (window.location.href.includes("/share/") === true) {
     (async function () {
         await axios({
             method: 'post',
-            // url: `http://localhost:3000/api/score/get`,
-            url: `https://pykho.dev/api/score/get`,
+            url: `http://localhost:3000/api/score/get`,
+            // url: `https://pykho.dev/api/score/get`,
             data: {
                 ["id"]: window.location.href.split("/").pop(),
             }
@@ -83,14 +83,14 @@ class Share extends Component {
     render() {
         return (
             <div className={`${styles.main} ${this.state.main}`}>
-                <div className={styles.letters}>
-                    <span className="letter-p"><span className={styles.letter}>P</span></span>
-                    <span className="letter-y"><span className={styles.letter}>Y</span></span>
-                    <span className="letter-k"><span className={styles.letter}>K</span></span>
-                    <span className="letter-h"><span className={styles.letter}>H</span></span>
-                    <span className="letter-o"><span className={styles.letter}>O</span></span>
-                </div>
-                <div className={`${styles.main} ${this.state.getUsername}`}>
+                <div className={`${styles.main} ${share.main} ${this.state.getUsername}`}>
+                    <div className={styles.letters}>
+                        <span className="letter-p"><span className={styles.letter}>P</span></span>
+                        <span className="letter-y"><span className={styles.letter}>Y</span></span>
+                        <span className="letter-k"><span className={styles.letter}>K</span></span>
+                        <span className="letter-h"><span className={styles.letter}>H</span></span>
+                        <span className="letter-o"><span className={styles.letter}>O</span></span>
+                    </div>
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                     <div className={share.score}>
                         <h3 className={share.title}>User</h3>

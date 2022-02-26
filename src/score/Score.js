@@ -41,8 +41,8 @@ class Score extends Component {
             if (sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "") {
                 axios({
                     method: 'post',
-                    // url: `http://localhost:3000/api/score/save`,
-                    url: `https://pykho.dev/api/score/save`,
+                    url: `http://localhost:3000/api/score/save`,
+                    // url: `https://pykho.dev/api/score/save`,
                     data: {
                         ["username"]: sessionStorage.getItem("username"),
                         ["points"]: sessionStorage.getItem("points"),
@@ -74,14 +74,14 @@ class Score extends Component {
     render() {
         return (
             <div className={`${styles.main} ${this.state.main}`}>
-                <div className={styles.letters}>
-                    <span className="letter-p"><span className={styles.letter}>P</span></span>
-                    <span className="letter-y"><span className={styles.letter}>Y</span></span>
-                    <span className="letter-k"><span className={styles.letter}>K</span></span>
-                    <span className="letter-h"><span className={styles.letter}>H</span></span>
-                    <span className="letter-o"><span className={styles.letter}>O</span></span>
-                </div>
-                <div className={`${styles.main} ${this.state.getUsername}`}>
+                <div className={`${styles.main} ${score.main} ${this.state.getUsername}`}>
+                    <div className={styles.letters}>
+                        <span className="letter-p"><span className={styles.letter}>P</span></span>
+                        <span className="letter-y"><span className={styles.letter}>Y</span></span>
+                        <span className="letter-k"><span className={styles.letter}>K</span></span>
+                        <span className="letter-h"><span className={styles.letter}>H</span></span>
+                        <span className="letter-o"><span className={styles.letter}>O</span></span>
+                    </div>
                     <button onClick={() => changeScreen("back")} className={styles.button}><h1>← Back</h1></button>
                     <button onClick={() => this.saveScore()} className={styles.button}><h1>Share</h1></button>
                     <div className={score.score}>
@@ -105,6 +105,13 @@ class Score extends Component {
                     </div>
                 </div>
                 <div className={`${this.state.getUsername2}`}>
+                    <div className={styles.letters}>
+                        <span className="letter-p"><span className={styles.letter}>P</span></span>
+                        <span className="letter-y"><span className={styles.letter}>Y</span></span>
+                        <span className="letter-k"><span className={styles.letter}>K</span></span>
+                        <span className="letter-h"><span className={styles.letter}>H</span></span>
+                        <span className="letter-o"><span className={styles.letter}>O</span></span>
+                    </div>
                     <div className={score.flex}>
                         <input maxLength={20} placeholder={"Username"} onChange={(e) => this.updateUsername(e)} className={score.text_input}></input>
                         <button onClick={() => this.saveScore()} className={styles.button}><h1>Share</h1></button>
