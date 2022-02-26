@@ -41,8 +41,8 @@ class Score extends Component {
             if (sessionStorage.getItem("username") !== null && sessionStorage.getItem("username") !== "") {
                 axios({
                     method: 'post',
-                    url: `http://localhost:3000/api/score/save`,
-                    // url: `https://pykho.dev/api/score/save`,
+                    // url: `http://localhost:3000/api/score/save`,
+                    url: `https://pykho.dev/api/score/save`,
                     data: {
                         ["username"]: sessionStorage.getItem("username"),
                         ["points"]: sessionStorage.getItem("points"),
