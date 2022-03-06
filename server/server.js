@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb')
 // const bcrypt = require('bcryptjs');
 // const randomstring = require("randomstring")
+// console.log(require('dotenv').config())
 require('dotenv').config()
 app.use(bodyParser.json());
 const uri = process.env.uri; // Grab URI from .env file
@@ -177,15 +178,11 @@ app.post('/api/twitch/start', async function (req, res) {
     if (!req.body.username) {
         return res.send("No data");
     } else {
-        return res.send(await startChat(req.body.username));
-    }
-});
-
-app.post('/api/twitch/stop', async function (req, res) {
-    if (!req.body.username) {
-        return res.send("No data");
-    } else {
-        return res.send(await stopChat(req.body.username));
+        if (await client.db("Pykho").collection("Twitch-stash").findOne({ username: req.body.username }) === null) {
+            return res.send(await startChat(req.body.username));
+        } else {
+            return res.send("Channel is already being monitored.")
+        }
     }
 });
 
@@ -224,16 +221,12 @@ async function createData(client, newListing) {
 
 const startChat = async (channel) => {
     const TwitchBot = require('twitch-bot')
-    if (await client.db("Pykho").collection("Twitch-stash").findOne({ username: channel }) === null) {
-        await client.db("Pykho").collection("Twitch-stash").insertOne({
-            "username": channel,
-            "time": new Date(),
-            "messages": [],
-            "totalMessages": 0,
-        })
-    } else {
-        return "Channel is already being monitored."
-    }
+    await client.db("Pykho").collection("Twitch-stash").insertOne({
+        "username": channel,
+        "time": new Date(),
+        "messages": [],
+        "totalMessages": 0,
+    })
     console.log(`Started monitoring chat for ${channel}'s channel | ${new Date()}`);
     await new Promise(resolve => setTimeout(resolve, 2000));
     const Bot = new TwitchBot({
@@ -247,6 +240,7 @@ const startChat = async (channel) => {
     })
 
     Bot.on('message', async chatter => {
+        console.log(chatter.message)
         const client = new MongoClient(uri)
         try {
             await client.connect();

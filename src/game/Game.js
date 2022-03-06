@@ -42,9 +42,6 @@ class Game extends Component {
 
         this.changeScreen = async (val) => {
             if (val === "back") {
-                if (twitch) {
-                    await this.stopTwitch()
-                }
                 sessionStorage.setItem('screen', "start");
                 window.location.reload();
             }
@@ -89,7 +86,6 @@ class Game extends Component {
                         if (this.state.points > localStorage.getItem('highscore')) {
                             localStorage.setItem('highscore', this.state.points)
                         }
-                        await this.stopTwitch()
                         window.location.reload();
                     }
                 }
@@ -231,17 +227,6 @@ class Game extends Component {
                 this.getTwitch();
             }, 2000);
         })
-
-        this.stopTwitch = async () => {
-            return axios({
-                method: 'post',
-                // url: `http://localhost:3000/api/twitch/stop`,
-                url: `https://pykho.dev/api/twitch/stop`,
-                data: {
-                    ["username"]: sessionStorage.twitchUsername,
-                }
-            }).then((response) => console.log((response.data)))
-        }
 
         if (startGame === false) {
             this.startGame();
