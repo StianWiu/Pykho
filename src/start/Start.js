@@ -56,7 +56,7 @@ export default function Start() {
             {/* <button onClick={() => changeScreen("login")} className={styles.button}><h1>{loginButtonText()} →</h1></button> */}
             <h3 className={styles.highscore}>{getHighscore()}</h3>
             <br />
-            <KofiButton color="#524d50" title="Buy me a coffe" kofiID="stianwiu" />
+            <KofiButton color="#524d50" title="Buy me a coffee" kofiID="stianwiu" />
         </div >
     );
 }
