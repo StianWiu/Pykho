@@ -1,5 +1,6 @@
 import "../letters.css";
 import styles from "./start.module.css";
+import KofiButton from "kofi-button"
 
 const changeScreen = (val) => {
     if (val === "play") {
@@ -54,6 +55,8 @@ export default function Start() {
             {/* <button className={styles.disabled}><h1>Stats →</h1></button> */}
             {/* <button onClick={() => changeScreen("login")} className={styles.button}><h1>{loginButtonText()} →</h1></button> */}
             <h3 className={styles.highscore}>{getHighscore()}</h3>
+            <br />
+            <KofiButton color="#524d50" title="Buy me a coffe" kofiID="stianwiu" />
         </div >
     );
 }
