@@ -201,7 +201,11 @@ class Game extends Component {
                                     chat: chat
                                 })
                                 this.inputText({ key: "Enter", target: { value: `${response.data[s][1]}` } })
-                                await new Promise((resolve) => setTimeout(resolve, 500));
+                                if (response.data.length > 10) {
+                                    await new Promise((resolve) => setTimeout(resolve, 50));
+                                } else {
+                                    await new Promise((resolve) => setTimeout(resolve, 500));
+                                }
                             }
                         }
                     }
