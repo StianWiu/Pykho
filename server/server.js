@@ -9,7 +9,7 @@ const { MongoClient, ObjectId } = require('mongodb')
 require('dotenv').config()
 app.use(bodyParser.json());
 const uri = process.env.uri; // Grab URI from .env file
-const port = 3000; // Needs to be 3000 because of Nginx
+const port = 3001; // Needs to be 3001 because of Nginx
 
 // Comment this when in production
 // var cors = require('cors')
