@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb')
 // const bcrypt = require('bcryptjs');
 // const randomstring = require("randomstring")
-// console.log(require('dotenv').config())
 require('dotenv').config()
 app.use(bodyParser.json());
 const uri = process.env.uri; // Grab URI from .env file
@@ -240,7 +239,6 @@ const startChat = async (channel) => {
     })
 
     Bot.on('message', async chatter => {
-        console.log(chatter.message)
         const client = new MongoClient(uri)
         try {
             await client.connect();

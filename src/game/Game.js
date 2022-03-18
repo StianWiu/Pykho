@@ -52,7 +52,7 @@ class Game extends Component {
                 console.log("sent data")
                 return axios({
                     method: 'post',
-                    // url: `http://localhost:3000/api/new-words`,
+                    // url: `http://localhost:3001/api/new-words`,
                     url: `https://pykho.dev/api/new-words`,
                     data: {
                         ["data"]: this.state.nonExistent,
@@ -160,6 +160,7 @@ class Game extends Component {
                     }
                 }
                 if (this.state.words[0].includes(inputString.toLowerCase())) {
+                    console.log("test")
                     let enteredWords = this.state.enteredWords;
                     enteredWords.push(inputString.toLowerCase());
                     this.setState({
@@ -167,6 +168,16 @@ class Game extends Component {
                     })
                     this.removeLetter(wordArray);
                 } else {
+                    if (sessionStorage.getItem('gamemode') === "hard") {
+                        let tempPoints = this.state.points;
+                        tempPoints -= inputString.length;
+                        if (tempPoints < 0) {
+                            tempPoints = 0;
+                        }
+                        this.setState({
+                            points: tempPoints
+                        })
+                    }
                     this.state.nonExistent.push(inputString.toLowerCase())
                 }
             }
@@ -185,7 +196,7 @@ class Game extends Component {
             while (twitch === true) {
                 await axios({
                     method: 'post',
-                    // url: `http://localhost:3000/api/twitch/get`,
+                    // url: `http://localhost:3001/api/twitch/get`,
                     url: `https://pykho.dev/api/twitch/get`,
                     data: {
                         ["username"]: sessionStorage.twitchUsername,
@@ -217,7 +228,7 @@ class Game extends Component {
         this.startTwitch = async () => {
             return axios({
                 method: 'post',
-                // url: `http://localhost:3000/api/twitch/start`,
+                // url: `http://localhost:3001/api/twitch/start`,
                 url: `https://pykho.dev/api/twitch/start`,
                 data: {
                     ["username"]: sessionStorage.twitchUsername,
